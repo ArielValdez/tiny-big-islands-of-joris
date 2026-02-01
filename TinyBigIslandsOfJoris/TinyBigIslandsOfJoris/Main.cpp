@@ -24,14 +24,27 @@ int main(int argc, char* args[]) {
 		return 903;
 	}
 
+	size_t frameStart;
+	int frameTime;
+	float deltaTime = (float)SDL_GetTicks();
+
 	game->Ready();
 
 	while (game->Running())
 	{
+		frameStart = SDL_GetTicks();
+
 		game->HandleEvents();
-		game->Update(0.0);
-		game->PhysicsUpdate(0.0);
+		game->Update(deltaTime);
+		game->PhysicsUpdate(deltaTime);
 		game->Render();
+
+		frameTime = SDL_GetTicks() - frameStart;
+		deltaTime = game->WindowRuleManager->FrameDelay - frameTime;
+		if (game->WindowRuleManager->FrameDelay > frameTime)
+		{
+			SDL_Delay(deltaTime);
+		}
 	}
 
 	return finalize();

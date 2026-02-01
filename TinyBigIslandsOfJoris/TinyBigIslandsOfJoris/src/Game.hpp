@@ -1,10 +1,12 @@
 #pragma once
 #include <SDL.h>
+#include <SDL_image.h>
+#include <iostream>
 #include "WindowManager.h"
 
 class Game {
 public:
-	// Props
+	WindowManager* WindowRuleManager = NULL;
 public:
 	Game();
 
@@ -24,5 +26,4 @@ private:
 	bool Disposed;
 	SDL_Window* Window;
 	SDL_Renderer* Renderer;
-	WindowManager* WindowRuleManager = NULL;
 };

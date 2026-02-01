@@ -5,5 +5,5 @@ struct WindowManager {
 	int Height = 500;
 
 	int FPS = 60;
-
+	int FrameDelay = 1000 / FPS;
 };

@@ -1,10 +1,13 @@
-#include <iostream>
 #include "Game.hpp"
+
+SDL_Texture* playerTexture;
+SDL_Rect destR;
+SDL_Rect srcR;
 
 Game::Game()
 {
-	Renderer = NULL;
-	Window = NULL;
+	Renderer = nullptr;
+	Window = nullptr;
 	IsRunning = false;
 	Disposed = false;
 }
@@ -43,6 +46,16 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		return false;
 	}
 
+	SDL_Surface* surface = IMG_Load("Assets/Alma.png");
+	if (surface == nullptr)
+	{
+		std::printf("Error loading image player");
+		return false;
+	}
+
+	playerTexture = SDL_CreateTextureFromSurface(Renderer, surface);
+	SDL_FreeSurface(surface);
+
 	IsRunning = true;
 	return true;
 }
@@ -53,6 +66,10 @@ void Game::Ready() {
 
 void Game::Update(float delta) {
 	printf("HELLO");
+
+	destR.w = 64;
+	destR.h = 64;
+	destR.x += 1;
 }
 
 void Game::PhysicsUpdate(float delta) {
@@ -81,8 +98,8 @@ void Game::HandleEvents() {
 
 void Game::Render() {
 	SDL_RenderClear(Renderer);
+	SDL_RenderCopy(Renderer, playerTexture, nullptr, &destR);
 	SDL_RenderPresent(Renderer);
-	SDL_Delay(WindowRuleManager->FPS);
 }
 
 void Game::Finalize() {
