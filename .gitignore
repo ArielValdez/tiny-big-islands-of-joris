@@ -40,3 +40,9 @@
 
 # debug information files
 *.dwo
+.suo
+
+# Folders
+Debug
+x64
+obj
