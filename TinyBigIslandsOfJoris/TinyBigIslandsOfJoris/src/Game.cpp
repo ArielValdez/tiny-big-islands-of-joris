@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "TextureManager.hpp"
 
 SDL_Texture* playerTexture;
 SDL_Rect destR;
@@ -46,15 +47,13 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		return false;
 	}
 
-	SDL_Surface* surface = IMG_Load("Assets/Alma.png");
-	if (surface == nullptr)
+	playerTexture = TextureManager::LoadTexture("Assets/Alma.png", Renderer);
+
+	if (playerTexture == nullptr)
 	{
-		std::printf("Error loading image player");
+		std::printf("Error creating texture");
 		return false;
 	}
-
-	playerTexture = SDL_CreateTextureFromSurface(Renderer, surface);
-	SDL_FreeSurface(surface);
 
 	IsRunning = true;
 	return true;

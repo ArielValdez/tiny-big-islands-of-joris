@@ -30,6 +30,7 @@ int main(int argc, char* args[]) {
 
 	game->Ready();
 
+	// TODO make game loop better
 	while (game->Running())
 	{
 		frameStart = SDL_GetTicks();
