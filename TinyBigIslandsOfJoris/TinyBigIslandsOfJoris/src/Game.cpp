@@ -58,8 +58,6 @@ void Game::Ready() {
 }
 
 void Game::Update(float delta) {
-	printf("HELLO");
-
 	Player->Update(delta);
 }
 
@@ -80,10 +78,6 @@ void Game::HandleEvents() {
 		default:
 			break;
 		}
-	}
-	else
-	{
-		printf("No pending events.");
 	}
 }
 
