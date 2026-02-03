@@ -1,14 +1,14 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
+#include "GameObject.hpp"
 
-SDL_Texture* playerTexture;
-SDL_Rect destR;
-SDL_Rect srcR;
+GameObject* Player;
 
 Game::Game()
 {
 	Renderer = nullptr;
 	Window = nullptr;
+	Player = nullptr;
 	IsRunning = false;
 	Disposed = false;
 }
@@ -47,13 +47,7 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		return false;
 	}
 
-	playerTexture = TextureManager::LoadTexture("Assets/Alma.png", Renderer);
-
-	if (playerTexture == nullptr)
-	{
-		std::printf("Error creating texture");
-		return false;
-	}
+	Player = new GameObject("Assets/Alma.png", Renderer);
 
 	IsRunning = true;
 	return true;
@@ -66,9 +60,7 @@ void Game::Ready() {
 void Game::Update(float delta) {
 	printf("HELLO");
 
-	destR.w = 64;
-	destR.h = 64;
-	destR.x += 1;
+	Player->Update(delta);
 }
 
 void Game::PhysicsUpdate(float delta) {
@@ -97,7 +89,7 @@ void Game::HandleEvents() {
 
 void Game::Render() {
 	SDL_RenderClear(Renderer);
-	SDL_RenderCopy(Renderer, playerTexture, nullptr, &destR);
+	Player->Render();
 	SDL_RenderPresent(Renderer);
 }
 

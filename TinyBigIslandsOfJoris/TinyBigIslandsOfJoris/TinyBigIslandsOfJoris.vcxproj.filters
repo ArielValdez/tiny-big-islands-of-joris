@@ -24,6 +24,12 @@
     <ClCompile Include="src\TextureManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\Vector2.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -39,6 +45,15 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\TextureManager.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Vector2.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Color.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
