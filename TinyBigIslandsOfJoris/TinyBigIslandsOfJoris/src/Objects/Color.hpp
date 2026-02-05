@@ -3,9 +3,7 @@
 struct Color {
 	Color();
 	Color(float r, float g, float b);
-	Color(float r255, float g255, float b255);
 	Color(float r, float g, float b, float a);
-	Color(float r255, float g255, float b255, float a255);
 	Color(const char* hexCode);
 
 	float R; // Red Channel

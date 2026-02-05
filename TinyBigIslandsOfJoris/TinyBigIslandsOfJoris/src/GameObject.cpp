@@ -1,27 +1,25 @@
+#include "Game.hpp"
 #include "GameObject.hpp"
 #include "TextureManager.hpp"
 
-GameObject::GameObject(const char* textureName, SDL_Renderer* ren) {
-	Renderer = ren;
-	Texture = TextureManager::LoadTexture(textureName, Renderer);
+GameObject::GameObject(const char* textureName) {
+	Texture = TextureManager::LoadTexture(textureName);
 	SrcRect;
 	DestRect;
 	Position = Vector2(0, 0);
 
 }
 
-GameObject::GameObject(const char* textureName, SDL_Renderer* ren, int x, int y) {
-	Renderer = ren;
-	Texture = TextureManager::LoadTexture(textureName, Renderer);
+GameObject::GameObject(const char* textureName, int x, int y) {
+	Texture = TextureManager::LoadTexture(textureName);
 	SrcRect;
 	DestRect;
 	Position = Vector2(x, y);
 
 }
 
-GameObject::GameObject(const char* textureName, SDL_Renderer* ren, Vector2 pos) {
-	Renderer = ren;
-	Texture = TextureManager::LoadTexture(textureName, Renderer);
+GameObject::GameObject(const char* textureName, Vector2 pos) {
+	Texture = TextureManager::LoadTexture(textureName);
 	SrcRect;
 	DestRect;
 	Position = pos;
@@ -48,7 +46,7 @@ void GameObject::PhysicsUpdate(float delta) {
 }
 
 void GameObject::Render() {
-	SDL_RenderCopy(Renderer, Texture, &SrcRect, &DestRect);
+	SDL_RenderCopy(Game::Renderer, Texture, &SrcRect, &DestRect);
 }
 
 void GameObject::Finalize() {

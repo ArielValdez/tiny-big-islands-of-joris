@@ -30,6 +30,12 @@
     <ClCompile Include="src\GameObject.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\Color.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\TileMap.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -56,12 +62,36 @@
     <ClInclude Include="src\Objects\Color.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\Objects\TileMap.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\TileMapLayer.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\WorldObjects\WorldManager.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\WorldObjects\World.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\WorldObjects\Chunk.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Alma.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="Assets\dirt.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="Assets\grass.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="Assets\water.jpg">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>

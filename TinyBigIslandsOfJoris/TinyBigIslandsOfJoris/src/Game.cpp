@@ -1,12 +1,16 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 #include "GameObject.hpp"
+#include "Objects/TileMap.hpp"
 
 GameObject* Player;
+TileMap* map;
+Vector2 Gravity;
+
+SDL_Renderer* Game::Renderer = nullptr;
 
 Game::Game()
 {
-	Renderer = nullptr;
 	Window = nullptr;
 	Player = nullptr;
 	IsRunning = false;
@@ -47,14 +51,16 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		return false;
 	}
 
-	Player = new GameObject("Assets/Alma.png", Renderer);
+	Player = new GameObject("Assets/Alma.png", 0, 0);
+	map = new TileMap();
 
+	Gravity = Vector2(0, 9.8); // Earth gravity
 	IsRunning = true;
 	return true;
 }
 
 void Game::Ready() {
-
+	
 }
 
 void Game::Update(float delta) {
@@ -83,6 +89,7 @@ void Game::HandleEvents() {
 
 void Game::Render() {
 	SDL_RenderClear(Renderer);
+	map->DrawMap();
 	Player->Render();
 	SDL_RenderPresent(Renderer);
 }

@@ -7,6 +7,7 @@
 class Game {
 public:
 	WindowManager* WindowRuleManager = NULL;
+	static SDL_Renderer* Renderer;
 public:
 	Game();
 
@@ -25,5 +26,4 @@ private:
 	bool IsRunning;
 	bool Disposed;
 	SDL_Window* Window;
-	SDL_Renderer* Renderer;
 };
