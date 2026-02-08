@@ -1,18 +1,22 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
-#include "GameObject.hpp"
 #include "Objects/TileMap.hpp"
+#include "Objects/ECS/Components.hpp"
 
-GameObject* Player;
+//GameObject* Player;
 TileMap* map;
 Vector2 Gravity;
 
+Manager manager;
+
 SDL_Renderer* Game::Renderer = nullptr;
+
+auto& player(manager.AddEntity());
 
 Game::Game()
 {
 	Window = nullptr;
-	Player = nullptr;
+	//Player = nullptr;
 	IsRunning = false;
 	Disposed = false;
 }
@@ -22,6 +26,8 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		printf("Could not init SDL");
 		return false;
 	}
+
+	Gravity = Vector2(0, 9.8); // Earth gravity
 
 	WindowRuleManager = new WindowManager();
 
@@ -51,10 +57,11 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		return false;
 	}
 
-	Player = new GameObject("Assets/Alma.png", 0, 0);
+	player.AddComponent<Sprite>("Assets/Alma.png", Vector2(32, 32));
 	map = new TileMap();
 
-	Gravity = Vector2(0, 9.8); // Earth gravity
+	manager.Init();
+
 	IsRunning = true;
 	return true;
 }
@@ -64,11 +71,13 @@ void Game::Ready() {
 }
 
 void Game::Update(float delta) {
-	Player->Update(delta);
+	//Player->Update(delta);
+	manager.Refresh();
+	manager.Update(delta);
 }
 
 void Game::PhysicsUpdate(float delta) {
-
+	manager.PhysicsUpdate(delta);
 }
 
 void Game::HandleEvents() {
@@ -90,7 +99,8 @@ void Game::HandleEvents() {
 void Game::Render() {
 	SDL_RenderClear(Renderer);
 	map->DrawMap();
-	Player->Render();
+	//Player->Render();
+	manager.Draw();
 	SDL_RenderPresent(Renderer);
 }
 

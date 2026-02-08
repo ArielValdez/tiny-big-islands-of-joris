@@ -46,7 +46,7 @@ void GameObject::PhysicsUpdate(float delta) {
 }
 
 void GameObject::Render() {
-	SDL_RenderCopy(Game::Renderer, Texture, &SrcRect, &DestRect);
+	TextureManager::Draw(Texture, SrcRect, DestRect);
 }
 
 void GameObject::Finalize() {

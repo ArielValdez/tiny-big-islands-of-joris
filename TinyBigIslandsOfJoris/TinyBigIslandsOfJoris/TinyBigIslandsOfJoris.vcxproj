@@ -159,9 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
+    <ClInclude Include="src\Objects\ECS\Components.hpp" />
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\GameObject.hpp" />
     <ClInclude Include="src\Objects\Color.hpp" />
+    <ClInclude Include="src\Objects\ECS\Sprite.hpp" />
+    <ClInclude Include="src\Objects\EntityComponentSystem.hpp" />
     <ClInclude Include="src\Objects\TileMap.hpp" />
     <ClInclude Include="src\Objects\TileMapLayer.hpp" />
     <ClInclude Include="src\Objects\Vector2.hpp" />

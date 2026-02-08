@@ -10,6 +10,11 @@ Vector2::Vector2(float x, float y) {
 	Y = y;
 }
 
+void  Vector2::Sum(Vector2 vec) {
+	X += vec.X;
+	Y += vec.Y;
+}
+
 Vector2::~Vector2() {
 
 }
