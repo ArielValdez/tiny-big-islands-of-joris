@@ -23,6 +23,9 @@ public:
 	virtual void PhysicsUpdate(float delta) {
 
 	}
+	virtual void HandlerEvent(SDL_Event sdlEvent) {
+
+	}
 	virtual void Draw() {
 
 	}
@@ -49,6 +52,8 @@ template <typename T> inline ComponentID GetComponentId() noexcept {
 
 class Entity {
 public:
+	Vector2 Position = Vector2(0, 0);
+public:
 	void Update(float delta) {
 		for (std::unique_ptr<Component>& item : Components)
 		{
@@ -66,6 +71,12 @@ public:
 		// render
 		for (std::unique_ptr<Component>& item : Components) {
 			item->Draw();
+		}
+	}
+
+	void HandleEvents(SDL_Event sdlEvent) {
+		for (std::unique_ptr<Component>& item : Components) {
+			item->HandlerEvent(sdlEvent);
 		}
 	}
 
@@ -134,12 +145,27 @@ public:
 		}
 	}
 
+	void HandleEvents(SDL_Event sdlEvent) {
+		for (auto& e : Entities)
+		{
+			e->HandleEvents(sdlEvent);
+		}
+	}
+
 	void Refresh() {
 		Entities.erase(std::remove_if(std::begin(Entities), std::end(Entities), [](const std::unique_ptr<Entity>& mEntity)
 			{
 				return !mEntity->IsActive();
 			}),
 			std::end(Entities));
+	}
+
+	void Destroy() {
+		for (auto& e : Entities)
+		{
+			e->Destroy();
+		}
+		Refresh();
 	}
 
 	Entity& AddEntity() {

@@ -31,13 +31,11 @@ public:
 	}
 
 	void Update(float delta) override {
-		Position.X += 1;
-		Position.Y += 1;
+		Position.X = Ent->Position.X;
+		Position.Y = Ent->Position.Y;
 
 		DestRect.x = Position.X;
 		DestRect.y = Position.Y;
-
-		std::cout << Position.X << ", " << Position.Y << std::endl;
 	}
 
 	void PhysicsUpdate(float delta) override {

@@ -1,4 +1,7 @@
 #pragma once
 #include "../EntityComponentSystem.hpp"
-#include "Sprite.hpp"
-#include "Controller.hpp"
+#include "SDL.h"
+
+class Player : public Entity {
+
+};

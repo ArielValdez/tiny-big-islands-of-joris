@@ -163,6 +163,8 @@
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\GameObject.hpp" />
     <ClInclude Include="src\Objects\Color.hpp" />
+    <ClInclude Include="src\Objects\ECS\Controller.hpp" />
+    <ClInclude Include="src\Objects\ECS\Player.hpp" />
     <ClInclude Include="src\Objects\ECS\Sprite.hpp" />
     <ClInclude Include="src\Objects\EntityComponentSystem.hpp" />
     <ClInclude Include="src\Objects\TileMap.hpp" />
@@ -171,6 +173,7 @@
     <ClInclude Include="src\Objects\WorldObjects\Chunk.hpp" />
     <ClInclude Include="src\Objects\WorldObjects\World.hpp" />
     <ClInclude Include="src\Objects\WorldObjects\WorldManager.hpp" />
+    <ClInclude Include="src\Stats.hpp" />
     <ClInclude Include="src\TextureManager.hpp" />
     <ClInclude Include="src\WindowManager.h" />
     <ClInclude Include="ThirdParty\SDL_Image\include\SDL_image.h" />

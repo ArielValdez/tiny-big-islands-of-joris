@@ -3,7 +3,6 @@
 #include "Objects/TileMap.hpp"
 #include "Objects/ECS/Components.hpp"
 
-//GameObject* Player;
 TileMap* map;
 Vector2 Gravity;
 
@@ -12,11 +11,11 @@ Manager manager;
 SDL_Renderer* Game::Renderer = nullptr;
 
 auto& player(manager.AddEntity());
+Controller controller;
 
 Game::Game()
 {
 	Window = nullptr;
-	//Player = nullptr;
 	IsRunning = false;
 	Disposed = false;
 }
@@ -58,6 +57,9 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	}
 
 	player.AddComponent<Sprite>("Assets/Alma.png", Vector2(32, 32));
+	player.AddComponent<Controller>();
+	controller = player.GetComponent<Controller>();
+
 	map = new TileMap();
 
 	manager.Init();
@@ -94,12 +96,13 @@ void Game::HandleEvents() {
 			break;
 		}
 	}
+
+	manager.HandleEvents(sdlEvent);
 }
 
 void Game::Render() {
 	SDL_RenderClear(Renderer);
 	map->DrawMap();
-	//Player->Render();
 	manager.Draw();
 	SDL_RenderPresent(Renderer);
 }
@@ -112,10 +115,10 @@ void Game::Finalize() {
 		SDL_Quit();
 
 		// Null pointers on pointers
+		manager.Destroy();
 		WindowRuleManager = nullptr;
 		Window = nullptr;
 		Renderer = nullptr;
-
 		Disposed = true;
 	}
 }
