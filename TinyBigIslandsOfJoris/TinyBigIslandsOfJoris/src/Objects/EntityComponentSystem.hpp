@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <bitset>
 #include <array>
+#include "Vector2.hpp"
+#include "SDL.h"
 
 class Component;
 class Entity;
@@ -17,10 +19,10 @@ public:
 	virtual bool Init() {
 		return false;
 	}
-	virtual void Update(float delta) {
+	virtual void Update(double delta) {
 
 	}
-	virtual void PhysicsUpdate(float delta) {
+	virtual void PhysicsUpdate(double delta) {
 
 	}
 	virtual void HandlerEvent(SDL_Event sdlEvent) {
@@ -54,14 +56,14 @@ class Entity {
 public:
 	Vector2 Position = Vector2(0, 0);
 public:
-	void Update(float delta) {
+	void Update(double delta) {
 		for (std::unique_ptr<Component>& item : Components)
 		{
 			item->Update(delta);
 		}
 	}
 
-	void PhysicsUpdate(float delta) {
+	void PhysicsUpdate(double delta) {
 		for (std::unique_ptr<Component>& item : Components) {
 			item->PhysicsUpdate(delta);
 		}
@@ -124,14 +126,14 @@ public:
 		// Init entities
 	}
 
-	void Update(float delta) {
+	void Update(double delta) {
 		for (auto& e : Entities)
 		{
 			e->Update(delta);
 		}
 	}
 
-	void PhysicsUpdate(float delta) {
+	void PhysicsUpdate(double delta) {
 		for (auto& e : Entities)
 		{
 			e->PhysicsUpdate(delta);
@@ -170,6 +172,13 @@ public:
 
 	Entity& AddEntity() {
 		Entity* e = new Entity();
+		std::unique_ptr<Entity> uPtr{ e };
+		Entities.emplace_back(std::move(uPtr));
+		return *e;
+	}
+
+	template <typename T> Entity& AddEntity() {
+		Entity* e = new T();
 		std::unique_ptr<Entity> uPtr{ e };
 		Entities.emplace_back(std::move(uPtr));
 		return *e;

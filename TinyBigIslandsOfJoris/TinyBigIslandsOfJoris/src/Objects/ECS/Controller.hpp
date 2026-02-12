@@ -1,5 +1,7 @@
 #pragma once
 #include "../EntityComponentSystem.hpp"
+#include "../../Stats.hpp"
+#include "Player.hpp"
 #include "SDL.h"
 
 class Controller : public Component {
@@ -7,36 +9,52 @@ public:
 
 public:
 	Controller() {
+		KeysPressed = NULL;
+		Stat = new Stats();
 	}
 
 	bool Init() {
+		Stats* stats = ((Player*)Ent)->Stat;
+		if (stats != nullptr) {
+			Stat = nullptr;
+		}
+		else
+		{
+			stats = new Stats();
+			if (stats->Speed <= 0)
+			{
+				stats->Speed = 10;
+			}
+		}
+		Stat = stats;
+		stats = nullptr;
 		return true;
 	}
 
-	void Update(float delta) override {
+	void Update(double delta) override {
 		if (KeysPressed[SDL_SCANCODE_SPACE])
 		{
 			std::cout << "Pressing SPACE" << std::endl;
 		}
 		if (KeysPressed[SDL_SCANCODE_W])
 		{
-			Ent->Position.Y += -10;
+			Ent->Position.Y += -Stat->Speed * delta;
 		}
 		if (KeysPressed[SDL_SCANCODE_S])
 		{
-			Ent->Position.Y += 10;
+			Ent->Position.Y += Stat->Speed * delta;
 		}
 		if (KeysPressed[SDL_SCANCODE_A])
 		{
-			Ent->Position.X += -10;
+			Ent->Position.X += -Stat->Speed * delta;
 		}
 		if (KeysPressed[SDL_SCANCODE_D])
 		{
-			Ent->Position.X += 10;
+			Ent->Position.X += Stat->Speed * delta;
 		}
 	}
 
-	void PhysicsUpdate(float delta) override {
+	void PhysicsUpdate(double delta) override {
 
 	}
 
@@ -49,4 +67,8 @@ public:
 	}
 private:
 	const Uint8* KeysPressed;
+	Stats* Stat;
+
+private:
+
 };

@@ -30,7 +30,7 @@ public:
 		return true;
 	}
 
-	void Update(float delta) override {
+	void Update(double delta) override {
 		Position.X = Ent->Position.X;
 		Position.Y = Ent->Position.Y;
 
@@ -38,7 +38,7 @@ public:
 		DestRect.y = Position.Y;
 	}
 
-	void PhysicsUpdate(float delta) override {
+	void PhysicsUpdate(double delta) override {
 
 	}
 

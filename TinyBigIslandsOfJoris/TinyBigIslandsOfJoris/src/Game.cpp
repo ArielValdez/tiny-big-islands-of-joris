@@ -2,6 +2,7 @@
 #include "TextureManager.hpp"
 #include "Objects/TileMap.hpp"
 #include "Objects/ECS/Components.hpp"
+#include "Objects/ECS/Entities.hpp"
 
 TileMap* map;
 Vector2 Gravity;
@@ -10,7 +11,7 @@ Manager manager;
 
 SDL_Renderer* Game::Renderer = nullptr;
 
-auto& player(manager.AddEntity());
+Player& player = (Player&)(manager.AddEntity<Player>());
 Controller controller;
 
 Game::Game()
@@ -69,16 +70,16 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 }
 
 void Game::Ready() {
-	
+
 }
 
-void Game::Update(float delta) {
+void Game::Update(double delta) {
 	//Player->Update(delta);
 	manager.Refresh();
 	manager.Update(delta);
 }
 
-void Game::PhysicsUpdate(float delta) {
+void Game::PhysicsUpdate(double delta) {
 	manager.PhysicsUpdate(delta);
 }
 

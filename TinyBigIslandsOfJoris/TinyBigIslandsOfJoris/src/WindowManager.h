@@ -5,5 +5,7 @@ struct WindowManager {
 	int Height = 500;
 
 	int FPS = 60;
-	int FrameDelay = 1000 / FPS;
+	float FrameDelay = (float)(1000.f / FPS);
+	float TargetFps = (float)(FPS / 1000.f);
+	float TargetDeltaTime = 1.5f;
 };

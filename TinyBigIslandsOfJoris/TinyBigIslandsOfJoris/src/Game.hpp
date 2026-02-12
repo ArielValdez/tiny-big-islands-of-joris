@@ -13,8 +13,8 @@ public:
 
 	bool Init(const char* title, int xPos, int yPos, int width, int height, bool fullscreen);
 	void Ready();
-	void Update(float delta);
-	void PhysicsUpdate(float delta);
+	void Update(double delta);
+	void PhysicsUpdate(double delta);
 	void HandleEvents();
 	void Render();
 	void Finalize();
