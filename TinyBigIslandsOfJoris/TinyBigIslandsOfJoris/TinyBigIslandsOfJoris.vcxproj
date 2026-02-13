@@ -156,6 +156,7 @@
     <ClCompile Include="src\Objects\ECS\Player.cpp" />
     <ClCompile Include="src\Objects\TileMap.cpp" />
     <ClCompile Include="src\Objects\Vector2.cpp" />
+    <ClCompile Include="src\Objects\Vector3.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,10 +169,12 @@
     <ClInclude Include="src\Objects\ECS\Entities.hpp" />
     <ClInclude Include="src\Objects\ECS\Player.hpp" />
     <ClInclude Include="src\Objects\ECS\Sprite.hpp" />
+    <ClInclude Include="src\Objects\ECS\Transform.hpp" />
     <ClInclude Include="src\Objects\EntityComponentSystem.hpp" />
     <ClInclude Include="src\Objects\TileMap.hpp" />
     <ClInclude Include="src\Objects\TileMapLayer.hpp" />
     <ClInclude Include="src\Objects\Vector2.hpp" />
+    <ClInclude Include="src\Objects\Vector3.hpp" />
     <ClInclude Include="src\Objects\WorldObjects\Chunk.hpp" />
     <ClInclude Include="src\Objects\WorldObjects\World.hpp" />
     <ClInclude Include="src\Objects\WorldObjects\WorldManager.hpp" />

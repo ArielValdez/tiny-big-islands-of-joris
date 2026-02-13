@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 class Vector2 {
 public:
 	float X;
@@ -14,6 +16,8 @@ public:
 	float GetMagnitude();
 
 	~Vector2();
+
+	friend std::ostream& operator<< (std::ostream& stream, const Vector2& vec);
 
 	Vector2 operator+ (Vector2 right) {
 		Vector2 vec = Vector2();

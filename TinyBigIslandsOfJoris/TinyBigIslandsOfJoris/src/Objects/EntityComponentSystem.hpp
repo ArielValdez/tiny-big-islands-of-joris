@@ -55,6 +55,7 @@ template <typename T> inline ComponentID GetComponentId() noexcept {
 class Entity {
 public:
 	Vector2 Position = Vector2(0, 0);
+	Vector2 Velocity = Vector2(0, 0);
 public:
 	void Update(double delta) {
 		for (std::unique_ptr<Component>& item : Components)

@@ -27,6 +27,11 @@ float Vector2::GetMagnitude() {
 	return mag;
 }
 
+std::ostream& operator<< (std::ostream& stream, const Vector2& vec) {
+	stream << "(" << vec.X << ", " << vec.Y << ")";
+	return stream;
+}
+
 Vector2::~Vector2() {
 
 }

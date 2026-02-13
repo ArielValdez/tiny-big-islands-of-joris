@@ -38,19 +38,23 @@ public:
 		}
 		if (KeysPressed[SDL_SCANCODE_W])
 		{
-			Ent->Position.Y += -Stat->Speed * delta;
+			Ent->Velocity.Y = -Stat->Speed * delta;
+			Ent->Position.Y += Ent->Velocity.Y;
 		}
 		if (KeysPressed[SDL_SCANCODE_S])
 		{
-			Ent->Position.Y += Stat->Speed * delta;
+			Ent->Velocity.Y = Stat->Speed * delta;
+			Ent->Position.Y += Ent->Velocity.Y;
 		}
 		if (KeysPressed[SDL_SCANCODE_A])
 		{
-			Ent->Position.X += -Stat->Speed * delta;
+			Ent->Velocity.X = -Stat->Speed * delta;
+			Ent->Position.X += Ent->Velocity.X;
 		}
 		if (KeysPressed[SDL_SCANCODE_D])
 		{
-			Ent->Position.X += Stat->Speed * delta;
+			Ent->Velocity.X = Stat->Speed * delta;
+			Ent->Position.X += Ent->Velocity.X;
 		}
 	}
 
