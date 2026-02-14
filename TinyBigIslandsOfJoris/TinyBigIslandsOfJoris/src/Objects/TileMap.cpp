@@ -82,5 +82,13 @@ void TileMap::DrawMap() {
 }
 
 TileMap::~TileMap() {
+	SDL_DestroyTexture(Water);
+	SDL_DestroyTexture(Grass);
+	SDL_DestroyTexture(Dirt);
+
+	Water = nullptr;
+	Grass = nullptr;
+	Dirt = nullptr;
+
 	delete[] map;
 }

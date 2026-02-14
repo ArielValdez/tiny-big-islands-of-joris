@@ -3,6 +3,7 @@
 #include "Objects/TileMap.hpp"
 #include "Objects/ECS/Components.hpp"
 #include "Objects/ECS/Entities.hpp"
+#include "Objects/ECS/Collission.hpp"
 
 TileMap* map;
 Vector2 Gravity;
@@ -12,6 +13,7 @@ Manager manager;
 SDL_Renderer* Game::Renderer = nullptr;
 
 Player& player = (Player&)(manager.AddEntity<Player>());
+Entity& wall = manager.AddEntity();
 Controller controller;
 
 Game::Game()
@@ -57,9 +59,20 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		return false;
 	}
 
+	player.AddComponent<Collider>(
+		Vector2(24, 24), 
+		CollissionMapLayer::PLAYER, 
+		CollissionMapLayer::ENEMY | CollissionMapLayer::WORLD_DEFAULT | CollissionMapLayer::ENEMY_PROJECTILE | CollissionMapLayer::TRAP);
 	player.AddComponent<Sprite>("Assets/Alma.png", Vector2(32, 32));
 	player.AddComponent<Controller>();
 	controller = player.GetComponent<Controller>();
+
+	wall.AddComponent<Collider>(
+		Vector2(32, 32),
+		CollissionMapLayer::WORLD_DEFAULT,
+		CollissionMapLayer::ENEMY | CollissionMapLayer::PLAYER | CollissionMapLayer::ENEMY_PROJECTILE | CollissionMapLayer::PLAYER_PROJECTILE);
+	wall.AddComponent<Sprite>("Assets/dirt.jpg", Vector2(32, 32));
+	wall.Position = Vector2(46, 46);
 
 	map = new TileMap();
 

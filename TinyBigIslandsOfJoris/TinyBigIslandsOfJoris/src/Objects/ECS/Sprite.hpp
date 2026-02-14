@@ -4,13 +4,18 @@
 
 class Sprite : public Component {
 public:
+	Vector2 Position;
+	Vector2 Size;
+	Vector2 Scale;
 
 public:
 	Sprite() = default;
 	Sprite(const char* path, Vector2 spriteSize) {
 		Texture = TextureManager::LoadTexture(path);
-		Size = spriteSize;
 		Position = Vector2(0, 0);
+		Scale = Vector2(1, 1);
+
+		Size = spriteSize;
 
 		SrcRect = SDL_Rect();
 		DestRect = SDL_Rect();
@@ -24,8 +29,8 @@ public:
 
 		DestRect.x = 0;
 		DestRect.y = 0;
-		DestRect.w = Size.X * 2;
-		DestRect.h = Size.Y * 2;
+		DestRect.w = Size.X * Scale.X * 2;
+		DestRect.h = Size.X * Scale.X * 2;
 
 		return true;
 	}
@@ -46,9 +51,12 @@ public:
 		TextureManager::Draw(Texture, SrcRect, DestRect);
 	}
 
+	~Sprite() {
+		SDL_DestroyTexture(Texture);
+		Texture = nullptr;
+	}
+
 private:
-	Vector2 Position;
-	Vector2 Size;
 	SDL_Texture* Texture;
 	SDL_Rect SrcRect;
 	SDL_Rect DestRect;

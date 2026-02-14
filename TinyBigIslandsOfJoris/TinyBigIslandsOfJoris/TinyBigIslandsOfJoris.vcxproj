@@ -153,6 +153,7 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Objects\Color.cpp" />
+    <ClCompile Include="src\Objects\ECS\Collission.cpp" />
     <ClCompile Include="src\Objects\ECS\Player.cpp" />
     <ClCompile Include="src\Objects\TileMap.cpp" />
     <ClCompile Include="src\Objects\Vector2.cpp" />
@@ -161,6 +162,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
+    <ClInclude Include="src\Objects\ECS\Collider.hpp" />
+    <ClInclude Include="src\Objects\ECS\Collission.hpp" />
     <ClInclude Include="src\Objects\ECS\Components.hpp" />
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\GameObject.hpp" />
