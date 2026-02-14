@@ -72,7 +72,7 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		CollissionMapLayer::WORLD_DEFAULT,
 		CollissionMapLayer::ENEMY | CollissionMapLayer::PLAYER | CollissionMapLayer::ENEMY_PROJECTILE | CollissionMapLayer::PLAYER_PROJECTILE);
 	wall.AddComponent<Sprite>("Assets/dirt.jpg", Vector2(32, 32));
-	wall.Position = Vector2(46, 46);
+	wall.Position = Vector2(128, 128);
 
 	map = new TileMap();
 
@@ -90,6 +90,12 @@ void Game::Update(double delta) {
 	//Player->Update(delta);
 	manager.Refresh();
 	manager.Update(delta);
+
+	if (Collission::AABB(&player.GetComponent<Collider>(), &wall.GetComponent<Collider>()))
+	{
+		std::cout << "Lol ex di even" << std::endl;
+		player.Velocity = player.Velocity * -1;
+	}
 }
 
 void Game::PhysicsUpdate(double delta) {

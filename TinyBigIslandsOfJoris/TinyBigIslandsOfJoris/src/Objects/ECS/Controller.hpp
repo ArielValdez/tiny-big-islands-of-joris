@@ -32,38 +32,47 @@ public:
 	}
 
 	void Update(double delta) override {
-		if (KeysPressed[SDL_SCANCODE_SPACE])
+
+		if (SdlEvent.type & SDL_KEYDOWN)
 		{
-			std::cout << "Pressing SPACE" << std::endl;
+			if (KeysPressed[SDL_SCANCODE_SPACE])
+			{
+				std::cout << "Pressing SPACE" << std::endl;
+			}
+			if (KeysPressed[SDL_SCANCODE_W])
+			{
+				Ent->Velocity.Y = -Stat->Speed * delta;
+				//Ent->Position.Y += Ent->Velocity.Y;
+			}
+			if (KeysPressed[SDL_SCANCODE_S])
+			{
+				Ent->Velocity.Y = Stat->Speed * delta;
+				//Ent->Position.Y += Ent->Velocity.Y;
+			}
+			if (KeysPressed[SDL_SCANCODE_A])
+			{
+				Ent->Velocity.X = -Stat->Speed * delta;
+				//Ent->Position.X += Ent->Velocity.X;
+			}
+			if (KeysPressed[SDL_SCANCODE_D])
+			{
+				Ent->Velocity.X = Stat->Speed * delta;
+				//Ent->Position.X += Ent->Velocity.X;
+			}
 		}
-		if (KeysPressed[SDL_SCANCODE_W])
+		if (SdlEvent.type == SDL_KEYUP)
 		{
-			Ent->Velocity.Y = -Stat->Speed * delta;
-			Ent->Position.Y += Ent->Velocity.Y;
-		}
-		if (KeysPressed[SDL_SCANCODE_S])
-		{
-			Ent->Velocity.Y = Stat->Speed * delta;
-			Ent->Position.Y += Ent->Velocity.Y;
-		}
-		if (KeysPressed[SDL_SCANCODE_A])
-		{
-			Ent->Velocity.X = -Stat->Speed * delta;
-			Ent->Position.X += Ent->Velocity.X;
-		}
-		if (KeysPressed[SDL_SCANCODE_D])
-		{
-			Ent->Velocity.X = Stat->Speed * delta;
-			Ent->Position.X += Ent->Velocity.X;
+			Ent->Velocity = Vector2();
 		}
 	}
 
 	void PhysicsUpdate(double delta) override {
-
+		Ent->Position = Ent->Position + Ent->Velocity;
 	}
 
-	void HandlerEvent(SDL_Event sdlEvent) override {
+	void HandlerEvent(const SDL_Event& sdlEvent) override {
 		KeysPressed = SDL_GetKeyboardState(NULL);
+		SdlEvent = sdlEvent;
 	}
 
 	~Controller() {
@@ -72,6 +81,7 @@ public:
 private:
 	const Uint8* KeysPressed;
 	Stats* Stat;
+	SDL_Event SdlEvent;
 
 private:
 

@@ -25,7 +25,7 @@ public:
 	virtual void PhysicsUpdate(double delta) {
 
 	}
-	virtual void HandlerEvent(SDL_Event sdlEvent) {
+	virtual void HandlerEvent(const SDL_Event& sdlEvent) {
 
 	}
 	virtual void Draw() {

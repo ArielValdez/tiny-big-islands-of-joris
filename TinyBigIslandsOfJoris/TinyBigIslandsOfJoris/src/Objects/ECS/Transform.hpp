@@ -16,6 +16,7 @@ public:
 	}
 
 	void Update(double delta) override {
-
+		Ent->Position = Ent->Position + Ent->Velocity;
+		Position = Ent->Position;
 	}
 };
