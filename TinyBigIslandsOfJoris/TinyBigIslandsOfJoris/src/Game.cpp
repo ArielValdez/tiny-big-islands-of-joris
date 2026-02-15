@@ -1,9 +1,8 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 #include "Objects/TileMap.hpp"
-#include "Objects/ECS/Components.hpp"
 #include "Objects/ECS/Entities.hpp"
-#include "Objects/ECS/Collission.hpp"
+#include "Objects/ECS/Components.hpp"
 
 TileMap* map;
 Vector2 Gravity;
@@ -11,10 +10,11 @@ Vector2 Gravity;
 Manager manager;
 
 SDL_Renderer* Game::Renderer = nullptr;
+std::vector<Collider*> Game::Colliders;
 
 Player& player = (Player&)(manager.AddEntity<Player>());
 Entity& wall = manager.AddEntity();
-Controller controller;
+Entity& tile0 = manager.AddEntity();
 
 Game::Game()
 {
@@ -60,12 +60,11 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	}
 
 	player.AddComponent<Collider>(
-		Vector2(24, 24), 
+		Vector2(32, 32), 
 		CollissionMapLayer::PLAYER, 
 		CollissionMapLayer::ENEMY | CollissionMapLayer::WORLD_DEFAULT | CollissionMapLayer::ENEMY_PROJECTILE | CollissionMapLayer::TRAP);
 	player.AddComponent<Sprite>("Assets/Alma.png", Vector2(32, 32));
 	player.AddComponent<Controller>();
-	controller = player.GetComponent<Controller>();
 
 	wall.AddComponent<Collider>(
 		Vector2(32, 32),
@@ -73,6 +72,9 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		CollissionMapLayer::ENEMY | CollissionMapLayer::PLAYER | CollissionMapLayer::ENEMY_PROJECTILE | CollissionMapLayer::PLAYER_PROJECTILE);
 	wall.AddComponent<Sprite>("Assets/dirt.jpg", Vector2(32, 32));
 	wall.Position = Vector2(128, 128);
+
+	tile0.AddComponent<Tile>(0, 0, 32, 32, 1);
+	tile0.Position = Vector2(256, 256);
 
 	map = new TileMap();
 

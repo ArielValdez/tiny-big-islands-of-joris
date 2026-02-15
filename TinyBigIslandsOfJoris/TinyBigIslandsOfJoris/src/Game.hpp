@@ -2,12 +2,17 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include <vector>
 #include "WindowManager.h"
+
+class Collider;
 
 class Game {
 public:
 	WindowManager* WindowRuleManager = NULL;
 	static SDL_Renderer* Renderer;
+	static std::vector<Collider*> Colliders;
+
 public:
 	Game();
 
