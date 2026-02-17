@@ -3,6 +3,7 @@
 #include "Objects/TileMap.hpp"
 #include "Objects/ECS/Entities.hpp"
 #include "Objects/ECS/Components.hpp"
+#include "Objects/Enums/GroupLabels.hpp"
 
 TileMap* map;
 Vector2 Gravity;
@@ -13,8 +14,10 @@ SDL_Renderer* Game::Renderer = nullptr;
 std::vector<Collider*> Game::Colliders;
 
 Player& player = (Player&)(manager.AddEntity<Player>());
-Entity& wall = manager.AddEntity();
-Entity& tile0 = manager.AddEntity();
+
+auto& players = manager.GetGroup(GroupLabels::PLAYERS);
+auto& tiles = manager.GetGroup(GroupLabels::MAP);
+auto& enemies = manager.GetGroup(GroupLabels::ENEMIES);
 
 Game::Game()
 {
@@ -59,24 +62,16 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		return false;
 	}
 
+	map = new TileMap();
+	map->LoadMap("Assets/16x16.map", 16, 16, 16, 16);
+
 	player.AddComponent<Collider>(
-		Vector2(32, 32), 
-		CollissionMapLayer::PLAYER, 
+		Vector2(32, 32),
+		CollissionMapLayer::PLAYER,
 		CollissionMapLayer::ENEMY | CollissionMapLayer::WORLD_DEFAULT | CollissionMapLayer::ENEMY_PROJECTILE | CollissionMapLayer::TRAP);
 	player.AddComponent<Sprite>("Assets/Alma.png", Vector2(32, 32));
 	player.AddComponent<Controller>();
-
-	wall.AddComponent<Collider>(
-		Vector2(32, 32),
-		CollissionMapLayer::WORLD_DEFAULT,
-		CollissionMapLayer::ENEMY | CollissionMapLayer::PLAYER | CollissionMapLayer::ENEMY_PROJECTILE | CollissionMapLayer::PLAYER_PROJECTILE);
-	wall.AddComponent<Sprite>("Assets/dirt.jpg", Vector2(32, 32));
-	wall.Position = Vector2(128, 128);
-
-	tile0.AddComponent<Tile>(0, 0, 32, 32, 1);
-	tile0.Position = Vector2(256, 256);
-
-	map = new TileMap();
+	player.AddGroup(GroupLabels::PLAYERS);
 
 	manager.Init();
 
@@ -89,15 +84,8 @@ void Game::Ready() {
 }
 
 void Game::Update(double delta) {
-	//Player->Update(delta);
 	manager.Refresh();
 	manager.Update(delta);
-
-	if (Collission::AABB(&player.GetComponent<Collider>(), &wall.GetComponent<Collider>()))
-	{
-		std::cout << "Lol ex di even" << std::endl;
-		player.Velocity = player.Velocity * -1;
-	}
 }
 
 void Game::PhysicsUpdate(double delta) {
@@ -124,8 +112,23 @@ void Game::HandleEvents() {
 
 void Game::Render() {
 	SDL_RenderClear(Renderer);
-	map->DrawMap();
-	manager.Draw();
+	//manager.Draw(); // Refactor
+
+	for (auto& t : tiles)
+	{
+		t->Draw();
+	}
+
+	for (auto& t : players)
+	{
+		t->Draw();
+	}
+
+	for (auto& t : enemies)
+	{
+		t->Draw();
+	}
+
 	SDL_RenderPresent(Renderer);
 }
 
@@ -143,6 +146,20 @@ void Game::Finalize() {
 		Renderer = nullptr;
 		Disposed = true;
 	}
+}
+
+void Game::AddTile(int id, int x, int y, int w, int h) {
+	auto& tile = manager.AddEntity();
+	tile.AddComponent<Tile>(x, y, w, h, id);
+	tile.AddGroup(GroupLabels::MAP);
+}
+
+void Game::AddTile(int id, Vector2 atlas) {
+	AddTile(id, atlas.X, atlas.Y, 32, 32);
+}
+
+void Game::AddTile(int id, Vector2 atlas, Vector2 size) {
+	AddTile(id, atlas.X, atlas.Y, size.X, size.Y);
 }
 
 Game::~Game() {

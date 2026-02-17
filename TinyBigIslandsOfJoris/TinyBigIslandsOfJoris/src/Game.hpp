@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "WindowManager.h"
+#include "Objects/Vector2.hpp"
 
 class Collider;
 
@@ -25,6 +26,10 @@ public:
 	void Finalize();
 
 	bool Running() { return IsRunning; }
+
+	static void AddTile(int id, int x, int y, int w, int h);
+	static void AddTile(int id, Vector2 atlas);
+	static void AddTile(int id, Vector2 atlas, Vector2 size);
 
 	~Game();
 private:

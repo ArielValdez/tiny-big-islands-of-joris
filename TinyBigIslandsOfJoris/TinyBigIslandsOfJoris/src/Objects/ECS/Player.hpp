@@ -8,7 +8,7 @@ public:
 	Stats* Stat;
 
 public:
-	Player();
+	Player(Manager& manager);
 
 	~Player();
 private:

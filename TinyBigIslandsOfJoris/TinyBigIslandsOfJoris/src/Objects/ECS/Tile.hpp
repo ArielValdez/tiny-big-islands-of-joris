@@ -39,8 +39,11 @@ public:
 			TexturePath = "Assets/grass.jpg";
 			break;
 		default:
+			TexturePath = "Assets/water.jpg";
 			break;
 		}
+
+		std::cout << TexturePath << std::endl;
 	}
 
 	Tile(Vector2 size, Vector2 scale, int id) {
@@ -50,13 +53,36 @@ public:
 		Rect.h = scale.Y;
 
 		TileId = id;
+
+		switch (TileId)
+		{
+		case 0:
+			TexturePath = "Assets/water.jpg";
+			break;
+		case 1:
+			TexturePath = "Assets/dirt.jpg";
+			break;
+		case 2:
+			TexturePath = "Assets/grass.jpg";
+			break;
+		default:
+			TexturePath = "Assets/water.jpg";
+			break;
+		}
 	}
 
 	bool Init() override {
 		Ent->AddComponent<Sprite>(TexturePath, Vector2(32, 32));
+		Ent->Position.X = Rect.x;
+		Ent->Position.Y = Rect.y;
 		Texture = &Ent->GetComponent<Sprite>();
 
 		return true;
+	}
+
+	void Draw() override
+	{
+		
 	}
 
 	~Tile() {

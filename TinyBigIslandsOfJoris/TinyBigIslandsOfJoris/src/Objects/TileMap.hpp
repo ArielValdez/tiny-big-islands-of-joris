@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Vector2.hpp"
 #include "../Game.hpp"
 
@@ -8,21 +9,10 @@ public:
 public:
 	TileMap();
 
-	void LoadMap(int arr[20][25]);
-	void DrawMap();
+	void LoadMap(std::string path, int sizex, int sizey, int mapW, int mapH);
+	void LoadMap(std::string path, Vector2 size, Vector2 widthHeight);
 
 	~TileMap();
 private:
-	// Props
-	Vector2 AtlasCoords;
-	SDL_Rect SrcRect;
-	SDL_Rect DestRect;
 
-	SDL_Texture* Dirt;
-	SDL_Texture* Grass;
-	SDL_Texture* Water;
-
-	int map[20][25];
-
-	size_t TileSize;
 };
