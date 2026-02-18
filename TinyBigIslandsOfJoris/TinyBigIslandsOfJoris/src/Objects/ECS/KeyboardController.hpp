@@ -2,15 +2,17 @@
 #include "../EntityComponentSystem.hpp"
 #include "../../Stats.hpp"
 #include "Player.hpp"
+#include "Sprite.hpp"
 #include "SDL.h"
 
-class Controller : public Component {
+class KeyboardController : public Component {
 public:
 
 public:
-	Controller() {
-		KeysPressed = NULL;
-		Stat = new Stats();
+	KeyboardController() {
+		KeysPressed = nullptr;
+		Stat = nullptr;
+		SpriteAnim = nullptr;
 	}
 
 	bool Init() {
@@ -28,6 +30,9 @@ public:
 		}
 		Stat = stats;
 		stats = nullptr;
+
+		SpriteAnim = &Ent->GetComponent<Sprite>();
+
 		return true;
 	}
 
@@ -75,7 +80,7 @@ public:
 		SdlEvent = sdlEvent;
 	}
 
-	~Controller() {
+	~KeyboardController() {
 
 	}
 private:
@@ -83,6 +88,6 @@ private:
 	Stats* Stat;
 	SDL_Event SdlEvent;
 
-private:
+	Sprite* SpriteAnim;
 
 };

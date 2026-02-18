@@ -70,7 +70,7 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		CollissionMapLayer::PLAYER,
 		CollissionMapLayer::ENEMY | CollissionMapLayer::WORLD_DEFAULT | CollissionMapLayer::ENEMY_PROJECTILE | CollissionMapLayer::TRAP);
 	player.AddComponent<Sprite>("Assets/Alma.png", Vector2(32, 32));
-	player.AddComponent<Controller>();
+	player.AddComponent<KeyboardController>();
 	player.AddGroup(GroupLabels::PLAYERS);
 
 	manager.Init();
