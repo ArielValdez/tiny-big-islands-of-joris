@@ -12,6 +12,7 @@ Sandbox game written in C++
 
 # TODO List
 - [ ] Crear un Terraria Like
+- [ ] Crear sistema Noita-Like (Cellular Automata)
 - [ ] Game Loop System
   - [x] Crear Update con delta
   - [ ] Crear PhysicsUpdate con delta
@@ -40,6 +41,7 @@ Sandbox game written in C++
 - [ ] Settings
 
 ## Rendering
+- [ ] On Rendering images, make Render Batching system if needed
 - [ ] Rendering system
   - [ ] Shaders:
   	- [ ] Animated nice water
