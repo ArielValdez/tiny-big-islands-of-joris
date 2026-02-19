@@ -12,6 +12,8 @@ public:
 
 	int AnimIdx = 0;
 
+	SDL_RendererFlip RenderFlip = SDL_FLIP_NONE;
+
 public:
 	Sprite() = default;
 	Sprite(const char* path, Vector2 spriteSize) {
@@ -90,10 +92,10 @@ public:
 	}
 
 	void Draw() override {
-		TextureManager::Draw(Texture, SrcRect, DestRect);
+		TextureManager::Draw(Texture, SrcRect, DestRect, RenderFlip);
 	}
 
-	void Play(char* animName) {
+	void Play(const char* animName) {
 		Delay = Animations[animName].Delay;
 		Frames = Animations[animName].Frames;
 		AnimIdx = Animations[animName].Index;

@@ -47,27 +47,34 @@ public:
 			if (KeysPressed[SDL_SCANCODE_W])
 			{
 				Ent->Velocity.Y = -Stat->Speed * delta;
+				SpriteAnim->Play("walk");
 				//Ent->Position.Y += Ent->Velocity.Y;
 			}
 			if (KeysPressed[SDL_SCANCODE_S])
 			{
 				Ent->Velocity.Y = Stat->Speed * delta;
+				SpriteAnim->Play("walk");
 				//Ent->Position.Y += Ent->Velocity.Y;
 			}
 			if (KeysPressed[SDL_SCANCODE_A])
 			{
 				Ent->Velocity.X = -Stat->Speed * delta;
+				SpriteAnim->Play("walk");
+				SpriteAnim->RenderFlip = SDL_FLIP_HORIZONTAL;
 				//Ent->Position.X += Ent->Velocity.X;
 			}
 			if (KeysPressed[SDL_SCANCODE_D])
 			{
 				Ent->Velocity.X = Stat->Speed * delta;
+				SpriteAnim->Play("walk");
+				SpriteAnim->RenderFlip = SDL_FLIP_NONE;
 				//Ent->Position.X += Ent->Velocity.X;
 			}
 		}
 		if (SdlEvent.type == SDL_KEYUP)
 		{
 			Ent->Velocity = Vector2();
+			SpriteAnim->Play("idle");
 		}
 	}
 
