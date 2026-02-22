@@ -1,93 +1,52 @@
 #pragma once
 #include "SDL.h"
 #include "../EntityComponentSystem.hpp"
-#include "Sprite.hpp"
-#include "Transform.hpp"
 #include "../Vector2.hpp"
 #include "../Enums/CollissionLayerMap.hpp"
 
 class Tile : public Component {
 public:
-	SDL_Rect Rect;
-
-	Transform* Transform;
-	Sprite* Texture;
+	SDL_Texture* Texture;
 
 	int TileId;
 
-	const char* TexturePath;
-
 public:
 	Tile() = default;
-	Tile(int x, int y, int w, int h, int id) {
-		Rect.x = x;
-		Rect.y = y;
-		Rect.w = w;
-		Rect.h = h;
+	Tile(int srcX, int srcY, int dstX, int dstY, int w, int h, int id, const char* path) {
+		SrcRect.x = srcX;
+		SrcRect.y = srcY;
+		SrcRect.w = w;
+		SrcRect.h = h;
+
+		DstRect.x = dstX;
+		DstRect.y = dstY;
+		DstRect.w = w * 2;
+		DstRect.h = h * 2;
 
 		TileId = id;
 
-		switch (TileId)
-		{
-		case 0:
-			TexturePath = "Assets/water.jpg";
-			break;
-		case 1:
-			TexturePath = "Assets/dirt.jpg";
-			break;
-		case 2:
-			TexturePath = "Assets/grass.jpg";
-			break;
-		default:
-			TexturePath = "Assets/water.jpg";
-			break;
-		}
-
-		std::cout << TexturePath << std::endl;
-	}
-
-	Tile(Vector2 size, Vector2 scale, int id) {
-		Rect.x = size.X;
-		Rect.y = size.Y;
-		Rect.w = scale.X;
-		Rect.h = scale.Y;
-
-		TileId = id;
-
-		switch (TileId)
-		{
-		case 0:
-			TexturePath = "Assets/water.jpg";
-			break;
-		case 1:
-			TexturePath = "Assets/dirt.jpg";
-			break;
-		case 2:
-			TexturePath = "Assets/grass.jpg";
-			break;
-		default:
-			TexturePath = "Assets/water.jpg";
-			break;
-		}
+		TexturePath = path;
+		Texture = TextureManager::LoadTexture(path);
 	}
 
 	bool Init() override {
-		Ent->AddComponent<Sprite>(TexturePath, Vector2(32, 32));
-		Ent->Position.X = Rect.x;
-		Ent->Position.Y = Rect.y;
-		Texture = &Ent->GetComponent<Sprite>();
-
+		Ent->Position.X = SrcRect.x;
+		Ent->Position.Y = SrcRect.y;
 		return true;
 	}
 
 	void Draw() override
 	{
-		
+		TextureManager::Draw(Texture, SrcRect, DstRect);
 	}
 
 	~Tile() {
-
+		SDL_DestroyTexture(Texture);
+		Texture = nullptr;
 	}
 private:
+	const char* TexturePath;
 
+	SDL_Rect SrcRect;
+	SDL_Rect DstRect;
 };

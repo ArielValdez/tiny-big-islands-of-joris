@@ -3,6 +3,8 @@
 #include <SDL_image.h>
 #include <iostream>
 #include <vector>
+#include <cmath>
+#include <algorithm>
 #include "WindowManager.h"
 #include "Objects/Vector2.hpp"
 
@@ -13,6 +15,8 @@ public:
 	WindowManager* WindowRuleManager = NULL;
 	static SDL_Renderer* Renderer;
 	static std::vector<Collider*> Colliders;
+	static bool IsRunning;
+	static SDL_Rect Camera;
 
 public:
 	Game();
@@ -27,13 +31,13 @@ public:
 
 	bool Running() { return IsRunning; }
 
-	static void AddTile(int id, int x, int y, int w, int h);
-	static void AddTile(int id, Vector2 atlas);
-	static void AddTile(int id, Vector2 atlas, Vector2 size);
+	static void AddTile(int id, int srcX, int srcY, int dstX, int dstY, int w, int h, const char* path);
+	static void AddTile(int id, Vector2 atlas, Vector2 pos, const char* path);
+	static void AddTile(int id, Vector2 atlas, Vector2 pos, Vector2 size, const char* path);
+	static float MoveTowards(float current, float target, float delta);
 
 	~Game();
 private:
-	bool IsRunning;
 	bool Disposed;
 	SDL_Window* Window;
 };

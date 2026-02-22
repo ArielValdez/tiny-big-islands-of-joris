@@ -194,13 +194,14 @@
     <ClInclude Include="ThirdParty\SDL_Image\include\SDL_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\16x16.map" />
+    <None Include="Assets\map.map" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Alma.png" />
     <Image Include="Assets\dirt.jpg" />
     <Image Include="Assets\grass.jpg" />
+    <Image Include="Assets\terrain_ss.png" />
     <Image Include="Assets\water.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

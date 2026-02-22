@@ -13,6 +13,8 @@ public:
 		KeysPressed = nullptr;
 		Stat = nullptr;
 		SpriteAnim = nullptr;
+
+		SdlEvent = SDL_Event();
 	}
 
 	bool Init() {

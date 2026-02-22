@@ -10,10 +10,16 @@ Vector2 Gravity;
 
 Manager manager;
 
+#pragma region Static
 SDL_Renderer* Game::Renderer = nullptr;
 std::vector<Collider*> Game::Colliders;
+bool Game::IsRunning = false;
+SDL_Rect Game::Camera = { 0, 0, 500, 500 };
+#pragma endregion
 
 Player& player = (Player&)(manager.AddEntity<Player>());
+
+const char* spriteSheetMap = "Assets/terrain_ss.png";
 
 auto& players = manager.GetGroup(GroupLabels::PLAYERS);
 auto& tiles = manager.GetGroup(GroupLabels::MAP);
@@ -35,7 +41,7 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	Gravity = Vector2(0, 9.8); // Earth gravity
 
 	WindowRuleManager = new WindowManager();
-
+	Game::Camera = { 0, 0, WindowRuleManager->Width, WindowRuleManager->Height };
 	int windowFlag = 0;
 
 	if (fullscreen) {
@@ -63,7 +69,7 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	}
 
 	map = new TileMap();
-	map->LoadMap("Assets/16x16.map", 16, 16, 16, 16);
+	map->LoadMap("Assets/map.map", 32, 32, 32, 32);
 
 	player.AddComponent<Collider>(
 		Vector2(32, 32),
@@ -86,6 +92,9 @@ void Game::Ready() {
 void Game::Update(double delta) {
 	manager.Refresh();
 	manager.Update(delta);
+
+	Camera.x = player.Position.X - (WindowRuleManager->Width / 2);
+	Camera.y = player.Position.Y - (WindowRuleManager->Height / 2);
 }
 
 void Game::PhysicsUpdate(double delta) {
@@ -148,18 +157,26 @@ void Game::Finalize() {
 	}
 }
 
-void Game::AddTile(int id, int x, int y, int w, int h) {
+void Game::AddTile(int id, int srcX, int srcY, int dstX, int dstY, int w, int h, const char* path) {
 	auto& tile = manager.AddEntity();
-	tile.AddComponent<Tile>(x, y, w, h, id);
+	tile.AddComponent<Tile>(srcX, srcY, dstX, dstY, w, h, id, spriteSheetMap);
 	tile.AddGroup(GroupLabels::MAP);
 }
 
-void Game::AddTile(int id, Vector2 atlas) {
-	AddTile(id, atlas.X, atlas.Y, 32, 32);
+void Game::AddTile(int id, Vector2 atlas, Vector2 pos, const char* path) {
+	AddTile(id, atlas.X, atlas.Y, pos.X, pos.Y, 32, 32, path);
 }
 
-void Game::AddTile(int id, Vector2 atlas, Vector2 size) {
-	AddTile(id, atlas.X, atlas.Y, size.X, size.Y);
+void Game::AddTile(int id, Vector2 atlas, Vector2 pos, Vector2 size, const char* path) {
+	AddTile(id, atlas.X, atlas.Y, pos.X, pos.Y, size.X, size.Y, path);
+}
+
+float Game::MoveTowards(float current, float target, float delta) {
+	if (std::abs(target - current) <= delta)
+	{
+		return target;
+	}
+	return current + std::copysignf(delta, target - current);
 }
 
 Game::~Game() {

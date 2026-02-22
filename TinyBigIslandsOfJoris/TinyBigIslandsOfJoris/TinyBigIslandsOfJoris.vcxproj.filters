@@ -137,7 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Assets\16x16.map" />
+    <None Include="Assets\map.map" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Alma.png">
@@ -150,6 +150,9 @@
       <Filter>Archivos de recursos</Filter>
     </Image>
     <Image Include="Assets\water.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="Assets\terrain_ss.png">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>
