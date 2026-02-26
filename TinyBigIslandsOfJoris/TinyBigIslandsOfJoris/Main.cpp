@@ -20,8 +20,6 @@ void cleanup() {
 }
 
 int main(int argc, char* args[]) {
-	bool running = true;
-
 	if (!init())
 	{
 		return 903;
