@@ -50,7 +50,7 @@
     <Copy SourceFiles="$(MSBuildThisFileDirectory)../..//build/native/bin/Win32\SDL2.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
   </Target>
   <Target Name="sdl2_nuget_redist_AfterBuild_x64" Label="x64" Condition="'$(Platform.ToLower())' == 'x64'" AfterTargets="sdl2_nuget_redist_AfterBuild">
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)bin\x64\SDL2.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../..//build/native/bin/x64\SDL2.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
   </Target>
   <UsingTask TaskName="sdl2_nuget_redist_Contains" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
     <ParameterGroup>
