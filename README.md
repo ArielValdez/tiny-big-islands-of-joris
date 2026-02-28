@@ -9,6 +9,8 @@ Sandbox game written in C++
 * https://www.youtube.com/watch?v=agn8GqGrCj4&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx&index=7
 * https://www.youtube.com/watch?v=_45s_gNicwo&list=PLAGy_slICtV1AD8nV3nEe7P8j82XdxH-7
 * https://www.youtube.com/watch?v=hBwhiaxLAJM
+* https://www.youtube.com/watch?v=IaUcAt0jDqs&list=PLFAIgTeqcARmowCzcOMil78OxcPNsac70&index=18
+* https://www.youtube.com/watch?v=h2c4xomVFRg
 * https://www.parallelrealities.co.uk/tutorials/
 
 # TODO List
