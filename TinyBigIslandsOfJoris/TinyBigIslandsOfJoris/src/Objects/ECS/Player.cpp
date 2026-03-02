@@ -3,8 +3,9 @@
 
 Player::Player(Manager& manager) : Entity(manager) {
 	Stat = new Stats();
+	DefaultStat = Stats();
 }
 
 Player::~Player() {
-
+	Stat = nullptr;
 }

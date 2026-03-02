@@ -31,6 +31,11 @@ public:
 	virtual void Draw() {
 
 	}
+
+	virtual void Draw(SDL_Rect& camera) {
+
+	}
+
 	virtual ~Component() {
 
 	}
@@ -59,34 +64,64 @@ class Entity {
 public:
 	Vector2 Position = Vector2(0, 0);
 	Vector2 Velocity = Vector2(0, 0);
+	bool Visible = true;
 public:
 	Entity(Manager& manager) : Man(manager) {
 
 	}
 
 	void Update(double delta) {
-		for (std::unique_ptr<Component>& item : Components)
+		if (Visible)
 		{
-			item->Update(delta);
+			for (std::unique_ptr<Component>& item : Components)
+			{
+				item->Update(delta);
+			}
 		}
 	}
 
 	void PhysicsUpdate(double delta) {
-		for (std::unique_ptr<Component>& item : Components) {
-			item->PhysicsUpdate(delta);
+		if (Visible)
+		{
+			for (std::unique_ptr<Component>& item : Components) {
+				item->PhysicsUpdate(delta);
+			}
 		}
 	}
 
 	void Draw() {
 		// render
-		for (std::unique_ptr<Component>& item : Components) {
-			item->Draw();
+		if (Visible)
+		{
+			for (std::unique_ptr<Component>& item : Components) {
+				item->Draw();
+			}
+		}
+	}
+
+	void Draw(SDL_Rect camera) {
+		// render
+		if (Visible)
+		{
+			for (std::unique_ptr<Component>& item : Components) {
+				item->Draw(camera);
+			}
 		}
 	}
 
 	void HandleEvents(SDL_Event sdlEvent) {
-		for (std::unique_ptr<Component>& item : Components) {
-			item->HandlerEvent(sdlEvent);
+		if (Visible)
+		{
+			for (std::unique_ptr<Component>& item : Components) {
+				item->HandlerEvent(sdlEvent);
+			}
+		}
+	}
+
+	virtual void HandleCollission(Entity* other) {
+		if (Visible)
+		{
+
 		}
 	}
 
@@ -94,6 +129,7 @@ public:
 
 	void Destroy() {
 		Active = false;
+		Visible = false;
 	}
 
 	// Is (in) group?
@@ -168,6 +204,13 @@ public:
 		for (auto& e : Entities)
 		{
 			e->Draw();
+		}
+	}
+
+	void Draw(SDL_Rect& camera) {
+		for (auto& e : Entities)
+		{
+			e->Draw(camera);
 		}
 	}
 

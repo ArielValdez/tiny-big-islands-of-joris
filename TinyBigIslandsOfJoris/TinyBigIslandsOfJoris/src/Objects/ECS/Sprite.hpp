@@ -68,7 +68,7 @@ public:
 		DestRect.x = 0;
 		DestRect.y = 0;
 		DestRect.w = Size.X * Scale.X * 2;
-		DestRect.h = Size.X * Scale.X * 2;
+		DestRect.h = Size.Y * Scale.Y * 2;
 
 		return true;
 	}
@@ -93,6 +93,10 @@ public:
 
 	void Draw() override {
 		TextureManager::Draw(Texture, SrcRect, DestRect, RenderFlip);
+	}
+
+	void Draw(SDL_Rect& camera) override {
+		TextureManager::Draw(Texture, SrcRect, DestRect, camera, RenderFlip);
 	}
 
 	void Play(const char* animName) {

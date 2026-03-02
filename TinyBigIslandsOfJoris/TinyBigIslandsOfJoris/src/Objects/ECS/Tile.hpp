@@ -7,7 +7,7 @@
 class Tile : public Component {
 public:
 	SDL_Texture* Texture;
-
+	Vector2 AtlasCoords;
 	int TileId;
 
 public:
@@ -32,12 +32,20 @@ public:
 	bool Init() override {
 		Ent->Position.X = SrcRect.x;
 		Ent->Position.Y = SrcRect.y;
+
+		AtlasCoords = Vector2(SrcRect.x / SrcRect.w, SrcRect.y / SrcRect.h);
+
 		return true;
 	}
 
 	void Draw() override
 	{
 		TextureManager::Draw(Texture, SrcRect, DstRect);
+	}
+
+	void Draw(SDL_Rect& camera) override
+	{
+		TextureManager::Draw(Texture, SrcRect, DstRect, camera, SDL_FLIP_NONE);
 	}
 
 	~Tile() {

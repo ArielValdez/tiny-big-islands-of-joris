@@ -4,7 +4,15 @@ Game* game = nullptr;
 
 bool init() {
 	game = new Game();
-	return game->Init("Tiny Big Islands of Joris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+	game->WindowRuleManager = new WindowManager();
+
+	return game->Init(
+		"Tiny Big Islands of Joris", 
+		SDL_WINDOWPOS_CENTERED, 
+		SDL_WINDOWPOS_CENTERED, 
+		game->WindowRuleManager->Width, 
+		game->WindowRuleManager->Height, 
+		false);
 }
 
 int finalize() {
@@ -50,9 +58,9 @@ int main(int argc, char* args[]) {
 		}
 
 		//std::cout << deltaTime << std::endl;
-
 		game->HandleEvents();
 		game->Update(deltaTime);
+		game->HandleCollisions();
 		game->PhysicsUpdate(deltaTime);
 		game->Render();
 

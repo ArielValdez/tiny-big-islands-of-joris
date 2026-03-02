@@ -1,12 +1,13 @@
 #include "Game.hpp"
+#include "Calculator.hpp"
 #include "TextureManager.hpp"
-#include "Objects/TileMap.hpp"
+#include "Objects/TileRenderer.hpp"
 #include "Objects/ECS/Entities.hpp"
 #include "Objects/ECS/Components.hpp"
 #include "Objects/Enums/GroupLabels.hpp"
 
-TileMap* map;
-Vector2 Gravity;
+TileRenderer* map;
+Vector2 Game::Gravity;
 
 Manager manager;
 
@@ -18,6 +19,8 @@ SDL_Rect Game::Camera = { 0, 0, 500, 500 };
 #pragma endregion
 
 Player& player = (Player&)(manager.AddEntity<Player>());
+Entity& wallTest = manager.AddEntity();
+Entity& wallTest2 = manager.AddEntity();
 
 const char* spriteSheetMap = "Assets/terrain_ss.png";
 
@@ -40,7 +43,6 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 
 	Gravity = Vector2(0, 9.8); // Earth gravity
 
-	WindowRuleManager = new WindowManager();
 	Game::Camera = { 0, 0, WindowRuleManager->Width, WindowRuleManager->Height };
 	int windowFlag = 0;
 
@@ -68,7 +70,7 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		return false;
 	}
 
-	map = new TileMap();
+	map = new TileRenderer();
 	map->LoadMap("Assets/map.map", 32, 32, 32, 32);
 
 	player.AddComponent<Collider>(
@@ -78,6 +80,24 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	player.AddComponent<Sprite>("Assets/Alma.png", Vector2(32, 32));
 	player.AddComponent<KeyboardController>();
 	player.AddGroup(GroupLabels::PLAYERS);
+
+	wallTest.AddComponent<Collider>(
+		Vector2(512, 32),
+		CollissionMapLayer::WORLD_DEFAULT,
+		CollissionMapLayer::PLAYER | CollissionMapLayer::ENEMY | CollissionMapLayer::ENEMY_PROJECTILE);
+	wallTest.AddComponent<Sprite>("Assets/dirt.jpg", Vector2(512, 32));
+	wallTest.AddGroup(GroupLabels::MAP);
+
+	wallTest.Position = Vector2(0, 512);
+
+	wallTest2.AddComponent<Collider>(
+		Vector2(32, 512),
+		CollissionMapLayer::WORLD_DEFAULT,
+		CollissionMapLayer::PLAYER | CollissionMapLayer::ENEMY | CollissionMapLayer::ENEMY_PROJECTILE);
+	wallTest2.AddComponent<Sprite>("Assets/dirt.jpg", Vector2(32, 512));
+	wallTest2.AddGroup(GroupLabels::MAP);
+
+	wallTest2.Position = Vector2(1024, -512);
 
 	manager.Init();
 
@@ -95,6 +115,13 @@ void Game::Update(double delta) {
 
 	Camera.x = player.Position.X - (WindowRuleManager->Width / 2);
 	Camera.y = player.Position.Y - (WindowRuleManager->Height / 2);
+}
+
+void Game::HandleCollisions() {
+	auto* playerCollider = &player.GetComponent<Collider>();
+
+	playerCollider->MoveX(player.Velocity.X, tiles, nullptr);
+	playerCollider->MoveY(player.Velocity.Y, tiles, nullptr);
 }
 
 void Game::PhysicsUpdate(double delta) {
@@ -121,21 +148,21 @@ void Game::HandleEvents() {
 
 void Game::Render() {
 	SDL_RenderClear(Renderer);
-	//manager.Draw(); // Refactor
+	//manager.Draw(Game::Camera); // Refactor
 
 	for (auto& t : tiles)
 	{
-		t->Draw();
+		t->Draw(Game::Camera);
 	}
 
 	for (auto& t : players)
 	{
-		t->Draw();
+		t->Draw(Game::Camera);
 	}
 
 	for (auto& t : enemies)
 	{
-		t->Draw();
+		t->Draw(Game::Camera);
 	}
 
 	SDL_RenderPresent(Renderer);
@@ -169,14 +196,6 @@ void Game::AddTile(int id, Vector2 atlas, Vector2 pos, const char* path) {
 
 void Game::AddTile(int id, Vector2 atlas, Vector2 pos, Vector2 size, const char* path) {
 	AddTile(id, atlas.X, atlas.Y, pos.X, pos.Y, size.X, size.Y, path);
-}
-
-float Game::MoveTowards(float current, float target, float delta) {
-	if (std::abs(target - current) <= delta)
-	{
-		return target;
-	}
-	return current + std::copysignf(delta, target - current);
 }
 
 Game::~Game() {

@@ -1,12 +1,18 @@
 #pragma once
-#include "../EntityComponentSystem.hpp"
-#include "../../Stats.hpp"
+#include <SDL.h>
 #include "Player.hpp"
 #include "Sprite.hpp"
-#include "SDL.h"
+#include "../EntityComponentSystem.hpp"
+#include "../../Stats.hpp"
+#include "../../ControllerTypes/PlatformerController.hpp"
 
 class KeyboardController : public Component {
 public:
+	const Uint8* KeysPressed;
+	Stats* Stat;
+	SDL_Event SdlEvent;
+
+	Sprite* SpriteAnim;
 
 public:
 	KeyboardController() {
@@ -33,6 +39,8 @@ public:
 		Stat = stats;
 		stats = nullptr;
 
+		Platformer.Init(((Player*)Ent));
+
 		SpriteAnim = &Ent->GetComponent<Sprite>();
 
 		return true;
@@ -40,48 +48,55 @@ public:
 
 	void Update(double delta) override {
 
-		if (SdlEvent.type & SDL_KEYDOWN)
-		{
-			if (KeysPressed[SDL_SCANCODE_SPACE])
-			{
-				std::cout << "Pressing SPACE" << std::endl;
-			}
-			if (KeysPressed[SDL_SCANCODE_W])
-			{
-				Ent->Velocity.Y = -Stat->Speed * delta;
-				SpriteAnim->Play("walk");
-				//Ent->Position.Y += Ent->Velocity.Y;
-			}
-			if (KeysPressed[SDL_SCANCODE_S])
-			{
-				Ent->Velocity.Y = Stat->Speed * delta;
-				SpriteAnim->Play("walk");
-				//Ent->Position.Y += Ent->Velocity.Y;
-			}
-			if (KeysPressed[SDL_SCANCODE_A])
-			{
-				Ent->Velocity.X = -Stat->Speed * delta;
-				SpriteAnim->Play("walk");
-				SpriteAnim->RenderFlip = SDL_FLIP_HORIZONTAL;
-				//Ent->Position.X += Ent->Velocity.X;
-			}
-			if (KeysPressed[SDL_SCANCODE_D])
-			{
-				Ent->Velocity.X = Stat->Speed * delta;
-				SpriteAnim->Play("walk");
-				SpriteAnim->RenderFlip = SDL_FLIP_NONE;
-				//Ent->Position.X += Ent->Velocity.X;
-			}
-		}
-		if (SdlEvent.type == SDL_KEYUP)
-		{
-			Ent->Velocity = Vector2();
-			SpriteAnim->Play("idle");
-		}
+		Platformer.Update(delta, SdlEvent, SpriteAnim, KeysPressed);
+
+		//if (SdlEvent.type & SDL_KEYDOWN)
+		//{
+		//	if (KeysPressed[SDL_SCANCODE_SPACE])
+		//	{
+		//		std::cout << "Pressing SPACE" << std::endl;
+		//	}
+		//	if (KeysPressed[SDL_SCANCODE_W])
+		//	{
+		//		Ent->Velocity.Y = -Stat->Speed * delta;
+		//		SpriteAnim->Play("walk");
+		//		//Ent->Position.Y += Ent->Velocity.Y;
+		//	}
+		//	if (KeysPressed[SDL_SCANCODE_S])
+		//	{
+		//		Ent->Velocity.Y = Stat->Speed * delta;
+		//		SpriteAnim->Play("walk");
+		//		//Ent->Position.Y += Ent->Velocity.Y;
+		//	}
+		//	if (KeysPressed[SDL_SCANCODE_A])
+		//	{
+		//		Ent->Velocity.X = -Stat->Speed * delta;
+		//		//Ent->Velocity.X = Game::MoveTowards(Ent->Velocity.X, -Stat->Speed * delta, Stat->Acceleration * delta);
+		//		SpriteAnim->Play("walk");
+		//		SpriteAnim->RenderFlip = SDL_FLIP_HORIZONTAL;
+		//		//Ent->Position.X += Ent->Velocity.X;
+		//	}
+		//	if (KeysPressed[SDL_SCANCODE_D])
+		//	{
+		//		Ent->Velocity.X = Stat->Speed * delta;
+		//		//Ent->Velocity.X = Game::MoveTowards(Ent->Velocity.X, Stat->Speed, Stat->Acceleration * delta);
+
+		//		SpriteAnim->Play("walk");
+		//		SpriteAnim->RenderFlip = SDL_FLIP_NONE;
+		//		//Ent->Position.X += Ent->Velocity.X;
+		//	}
+		//}
+		//if (SdlEvent.type == SDL_KEYUP)
+		//{
+		//	Ent->Velocity = Vector2();
+
+		//	SpriteAnim->Play("idle");
+		//}
 	}
 
 	void PhysicsUpdate(double delta) override {
-		Ent->Position = Ent->Position + Ent->Velocity;
+		//Ent->Position = Ent->Position + Ent->Velocity;
+		Platformer.PostUpdate(delta);
 	}
 
 	void HandlerEvent(const SDL_Event& sdlEvent) override {
@@ -93,10 +108,5 @@ public:
 
 	}
 private:
-	const Uint8* KeysPressed;
-	Stats* Stat;
-	SDL_Event SdlEvent;
-
-	Sprite* SpriteAnim;
-
+	PlatformerController Platformer;
 };

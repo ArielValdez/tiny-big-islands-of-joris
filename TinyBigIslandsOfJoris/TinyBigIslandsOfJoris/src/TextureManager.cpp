@@ -14,3 +14,9 @@ void TextureManager::Draw(SDL_Texture* texture, SDL_Rect srcRect, SDL_Rect dstRe
 void TextureManager::Draw(SDL_Texture* texture, SDL_Rect srcRect, SDL_Rect dstRect, SDL_RendererFlip flip) {
 	SDL_RenderCopyEx(Game::Renderer, texture, &srcRect, &dstRect, NULL, NULL, flip);
 }
+
+void TextureManager::Draw(SDL_Texture* texture, SDL_Rect srcRect, SDL_Rect dstRect, SDL_Rect& camera, SDL_RendererFlip flip) {
+	dstRect.x = dstRect.x - camera.x;
+	dstRect.y = dstRect.y - camera.y;
+	SDL_RenderCopyEx(Game::Renderer, texture, &srcRect, &dstRect, NULL, NULL, flip);
+}

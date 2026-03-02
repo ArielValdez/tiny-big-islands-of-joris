@@ -3,16 +3,16 @@
 #include "Vector2.hpp"
 #include "../Game.hpp"
 
-class TileMap {
+class TileRenderer {
 public:
 	// Props
 public:
-	TileMap();
+	TileRenderer();
 
 	void LoadMap(const char* path, int sizex, int sizey, int mapW, int mapH);
 	void LoadMap(const char* path, Vector2 size, Vector2 widthHeight);
 
-	~TileMap();
+	~TileRenderer();
 private:
 
 };

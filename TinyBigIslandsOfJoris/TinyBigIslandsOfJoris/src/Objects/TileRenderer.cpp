@@ -1,12 +1,12 @@
 #include <fstream>
-#include "TileMap.hpp"
+#include "TileRenderer.hpp"
 #include "../Game.hpp"
 
-TileMap::TileMap() {
+TileRenderer::TileRenderer() {
 	//LoadMap(lvl1);
 }
 
-void TileMap::LoadMap(const char* path, int sizex, int sizey, int mapW, int mapH) {
+void TileRenderer::LoadMap(const char* path, int sizex, int sizey, int mapW, int mapH) {
 	char c;
 	std::fstream mapFile;
 	mapFile.open(path);
@@ -30,9 +30,9 @@ void TileMap::LoadMap(const char* path, int sizex, int sizey, int mapW, int mapH
 	mapFile.close();
 }
 
-void TileMap::LoadMap(const char* path, Vector2 size, Vector2 widthHeight) {
+void TileRenderer::LoadMap(const char* path, Vector2 size, Vector2 widthHeight) {
 	LoadMap(path, size.X, size.Y, widthHeight.X, widthHeight.Y);
 }
 
-TileMap::~TileMap() {
+TileRenderer::~TileRenderer() {
 }

@@ -1,8 +1,8 @@
 #pragma once
 
 struct WindowManager {
-	int Width = 500;
-	int Height = 500;
+	int Width = 1280;
+	int Height = 720;
 
 	int FPS = 60;
 	float FrameDelay = (float)(1000.f / FPS);
