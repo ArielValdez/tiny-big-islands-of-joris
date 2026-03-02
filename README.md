@@ -18,7 +18,7 @@ Sandbox game written in C++
 - [ ] Crear sistema Noita-Like (Cellular Automata)
 - [ ] Game Loop System
   - [x] Crear Update con delta
-  - [ ] Crear PhysicsUpdate con delta
+  - [x] Crear PhysicsUpdate con delta
 - [ ] Sistema de inventario
   - [ ] Personaje tendrá una máximo de 50 objetos diferentes
 - [ ] Sistema de equipamiento
@@ -44,7 +44,8 @@ Sandbox game written in C++
 - [ ] Settings
 
 ## Rendering
-- [ ] On Rendering images, make Render Batching system if needed
+- [x] On Rendering images, make Render Batching system if needed
+	- Already part of SDL
 - [ ] Rendering system
   - [ ] Shaders:
   	- [ ] Animated nice water
@@ -67,7 +68,6 @@ Sandbox game written in C++
   	- [ ] Shadows
    	- [ ] Cascaded shadow maps
 	- [ ] Depth of field (maybe blur far stuff)
-  - [ ] Use the same shader for all things in game
 
 ## Multiplayer
 - [ ] Aprender a cómo crear multiplayer, basado en buffers, sincronización.
