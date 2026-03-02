@@ -16,7 +16,7 @@ Sandbox game written in C++
 # TODO List
 - [ ] Crear un Terraria Like
 - [ ] Crear sistema Noita-Like (Cellular Automata)
-- [ ] Game Loop System
+- [x] Game Loop System
   - [x] Crear Update con delta
   - [x] Crear PhysicsUpdate con delta
 - [ ] Sistema de inventario
