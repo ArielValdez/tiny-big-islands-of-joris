@@ -159,6 +159,7 @@
     <ClCompile Include="src\Objects\ECS\Collission.cpp" />
     <ClCompile Include="src\Objects\ECS\Player.cpp" />
     <ClCompile Include="src\Objects\EntityComponentSystem.cpp" />
+    <ClCompile Include="src\Objects\Enums\JobClass.hpp" />
     <ClCompile Include="src\Objects\TileRenderer.cpp" />
     <ClCompile Include="src\Objects\Vector2.cpp" />
     <ClCompile Include="src\Objects\Vector3.cpp" />
@@ -183,7 +184,9 @@
     <ClInclude Include="src\Objects\ECS\Transform.hpp" />
     <ClInclude Include="src\Objects\EntityComponentSystem.hpp" />
     <ClInclude Include="src\Objects\Enums\CollissionLayerMap.hpp" />
+    <ClInclude Include="src\Objects\Enums\EquipmentType.hpp" />
     <ClInclude Include="src\Objects\Enums\GroupLabels.hpp" />
+    <ClInclude Include="src\Objects\Enums\HiliiRaces.hpp" />
     <ClInclude Include="src\Objects\TileRenderer.hpp" />
     <ClInclude Include="src\Objects\TileMapLayer.hpp" />
     <ClInclude Include="src\Objects\Vector2.hpp" />

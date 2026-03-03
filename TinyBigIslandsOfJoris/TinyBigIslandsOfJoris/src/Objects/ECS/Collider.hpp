@@ -231,7 +231,7 @@ public:
 
 private:
 	Vector2 Remainder;
-	const Vector2 PixelsCheck = Vector2(8, 8);
+	const Vector2 PixelsCheck = Vector2(12, 12);
 	Vector2 Size;
 
 	bool XCollision;
