@@ -34,6 +34,8 @@ Sandbox game written in C++
   - [ ] Máximo de 40 objetos diferentes
 - [ ] Sistema de Tilemaps
   - [ ] Verificar si se puede hacer Dual TileMaps
+- [ ] Tilemap editing
+	- [ ] World editing
 
 ## GUI
 - [ ] Pixel Art Game
