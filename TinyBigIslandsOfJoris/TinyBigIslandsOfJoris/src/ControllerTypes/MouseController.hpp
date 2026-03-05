@@ -34,14 +34,14 @@ private:
 
 private:
 	void MouseJustPressed(float delta, const SDL_Event& sdlEvent, Sprite* spriteAnim) {
-		/*Vector2 mouseGlobalPosition = MousePosition + Vector2(Game::Camera.x, Game::Camera.y);
-		Vector2 tiledMousePosition = TileRenderer::GetTiledPosition(mouseGlobalPosition);*/
+		Vector2 mouseGlobalPosition = MousePosition + Vector2(Game::Camera.x, Game::Camera.y);
+		Vector2 tiledMousePosition = TileRenderer::GetTiledPosition(mouseGlobalPosition);
 		if (MouseActions & SDL_BUTTON_LMASK && !(PostMouseButtonPressed & SDL_BUTTON_LMASK))
 		{
-			/*std::cout << "Left button clicked at: " << MousePosition << std::endl;
+			std::cout << "Left button clicked at: " << MousePosition << std::endl;
 			std::cout << "Mouse global position relative to camera: " << mouseGlobalPosition << std::endl;
 			std::cout << "Tile position relative to mouse: " << tiledMousePosition << std::endl;
-			Game::AddTile(0, Vector2(0, 0), tiledMousePosition, Vector2(16,16), "Assets/dirt.jpg");*/
+			Game::AddTile(0, Vector2(0, 0), tiledMousePosition, Vector2(16,16), "Assets/dirt.jpg");
 		}
 	}
 
