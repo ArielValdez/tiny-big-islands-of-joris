@@ -12,6 +12,10 @@ int Calculator::RoundInt(float s) {
 	return static_cast<int>(std::round(s));
 }
 
+int Calculator::FloorInt(float s) {
+	return static_cast<int>(std::floor(s));
+}
+
 int Calculator::Sign(int n) {
 	return (n > 0) - (n < 0);
 }

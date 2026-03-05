@@ -8,6 +8,7 @@ class Tile : public Component {
 public:
 	SDL_Texture* Texture;
 	Vector2 AtlasCoords;
+	Vector2 TilePosition;
 	int TileId;
 
 public:
@@ -18,8 +19,8 @@ public:
 		SrcRect.w = w;
 		SrcRect.h = h;
 
-		DstRect.x = dstX;
-		DstRect.y = dstY;
+		DstRect.x = dstX - (w / 2);
+		DstRect.y = dstY - (h / 2);
 		DstRect.w = w * 2;
 		DstRect.h = h * 2;
 
@@ -34,6 +35,7 @@ public:
 		Ent->Position.Y = SrcRect.y;
 
 		AtlasCoords = Vector2(SrcRect.x / SrcRect.w, SrcRect.y / SrcRect.h);
+		TilePosition = Vector2(DstRect.x / DstRect.w, DstRect.y / DstRect.h);
 
 		return true;
 	}

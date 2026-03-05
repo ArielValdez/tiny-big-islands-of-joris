@@ -6,6 +6,15 @@ TileRenderer::TileRenderer() {
 	//LoadMap(lvl1);
 }
 
+// TODO esto debe ser una función dinámica
+Vector2 TileRenderer::GetTiledPosition(Vector2 globalPosition) {
+	Vector2 tilePosition = Vector2(
+		Calculator::FloorInt(globalPosition.X / Game::DefaultTileSize.X), 
+		Calculator::FloorInt(globalPosition.Y / Game::DefaultTileSize.Y)) * 32;
+
+	return tilePosition;
+}
+
 void TileRenderer::LoadMap(const char* path, int sizex, int sizey, int mapW, int mapH) {
 	char c;
 	std::fstream mapFile;

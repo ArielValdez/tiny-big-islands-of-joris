@@ -5,6 +5,7 @@
 #include "../EntityComponentSystem.hpp"
 #include "../../Stats.hpp"
 #include "../../ControllerTypes/PlatformerController.hpp"
+#include "../../ControllerTypes/MouseController.hpp"
 
 class KeyboardController : public Component {
 public:
@@ -40,6 +41,7 @@ public:
 		stats = nullptr;
 
 		Platformer.Init(((Player*)Ent));
+		Mouse.Init(((Player*)Ent));
 
 		SpriteAnim = &Ent->GetComponent<Sprite>();
 
@@ -47,56 +49,14 @@ public:
 	}
 
 	void Update(double delta) override {
-
 		Platformer.Update(delta, SdlEvent, SpriteAnim, KeysPressed);
-
-		//if (SdlEvent.type & SDL_KEYDOWN)
-		//{
-		//	if (KeysPressed[SDL_SCANCODE_SPACE])
-		//	{
-		//		std::cout << "Pressing SPACE" << std::endl;
-		//	}
-		//	if (KeysPressed[SDL_SCANCODE_W])
-		//	{
-		//		Ent->Velocity.Y = -Stat->Speed * delta;
-		//		SpriteAnim->Play("walk");
-		//		//Ent->Position.Y += Ent->Velocity.Y;
-		//	}
-		//	if (KeysPressed[SDL_SCANCODE_S])
-		//	{
-		//		Ent->Velocity.Y = Stat->Speed * delta;
-		//		SpriteAnim->Play("walk");
-		//		//Ent->Position.Y += Ent->Velocity.Y;
-		//	}
-		//	if (KeysPressed[SDL_SCANCODE_A])
-		//	{
-		//		Ent->Velocity.X = -Stat->Speed * delta;
-		//		//Ent->Velocity.X = Game::MoveTowards(Ent->Velocity.X, -Stat->Speed * delta, Stat->Acceleration * delta);
-		//		SpriteAnim->Play("walk");
-		//		SpriteAnim->RenderFlip = SDL_FLIP_HORIZONTAL;
-		//		//Ent->Position.X += Ent->Velocity.X;
-		//	}
-		//	if (KeysPressed[SDL_SCANCODE_D])
-		//	{
-		//		Ent->Velocity.X = Stat->Speed * delta;
-		//		//Ent->Velocity.X = Game::MoveTowards(Ent->Velocity.X, Stat->Speed, Stat->Acceleration * delta);
-
-		//		SpriteAnim->Play("walk");
-		//		SpriteAnim->RenderFlip = SDL_FLIP_NONE;
-		//		//Ent->Position.X += Ent->Velocity.X;
-		//	}
-		//}
-		//if (SdlEvent.type == SDL_KEYUP)
-		//{
-		//	Ent->Velocity = Vector2();
-
-		//	SpriteAnim->Play("idle");
-		//}
+		Mouse.Update(delta, SdlEvent, SpriteAnim, 0);
 	}
 
 	void PhysicsUpdate(double delta) override {
 		//Ent->Position = Ent->Position + Ent->Velocity;
 		Platformer.PostUpdate(delta);
+		Mouse.PostUpdate(delta);
 	}
 
 	void HandlerEvent(const SDL_Event& sdlEvent) override {
@@ -109,4 +69,5 @@ public:
 	}
 private:
 	PlatformerController Platformer;
+	MouseController Mouse;
 };

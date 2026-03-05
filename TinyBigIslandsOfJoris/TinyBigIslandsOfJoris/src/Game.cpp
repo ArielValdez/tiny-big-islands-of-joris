@@ -16,6 +16,8 @@ SDL_Renderer* Game::Renderer = nullptr;
 std::vector<Collider*> Game::Colliders;
 bool Game::IsRunning = false;
 SDL_Rect Game::Camera = { 0, 0, 500, 500 };
+Vector2 Game::GlobalMousePosition = Vector2(0, 0);
+Vector2 Game::DefaultTileSize = Vector2(32, 32);
 #pragma endregion
 
 Player& player = (Player&)(manager.AddEntity<Player>());
@@ -113,6 +115,8 @@ void Game::Update(double delta) {
 	manager.Refresh();
 	manager.Update(delta);
 
+
+
 	Camera.x = player.Position.X - (WindowRuleManager->Width / 2);
 	Camera.y = player.Position.Y - (WindowRuleManager->Height / 2);
 }
@@ -191,11 +195,13 @@ void Game::AddTile(int id, int srcX, int srcY, int dstX, int dstY, int w, int h,
 }
 
 void Game::AddTile(int id, Vector2 atlas, Vector2 pos, const char* path) {
-	AddTile(id, atlas.X, atlas.Y, pos.X, pos.Y, 32, 32, path);
+	AddTile(id, atlas, pos, Game::DefaultTileSize, path);
 }
 
 void Game::AddTile(int id, Vector2 atlas, Vector2 pos, Vector2 size, const char* path) {
-	AddTile(id, atlas.X, atlas.Y, pos.X, pos.Y, size.X, size.Y, path);
+	auto& tile = manager.AddEntity();
+	tile.AddComponent<Tile>(atlas.X, atlas.Y, pos.X, pos.Y, size.X, size.Y, id, path);
+	tile.AddGroup(GroupLabels::MAP);
 }
 
 Game::~Game() {

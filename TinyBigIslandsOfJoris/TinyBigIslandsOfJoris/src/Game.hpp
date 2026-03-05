@@ -19,6 +19,8 @@ public:
 	static bool IsRunning;
 	static Vector2 Gravity;
 	static SDL_Rect Camera;
+	static Vector2 GlobalMousePosition;
+	static Vector2 DefaultTileSize;
 
 public:
 	Game();

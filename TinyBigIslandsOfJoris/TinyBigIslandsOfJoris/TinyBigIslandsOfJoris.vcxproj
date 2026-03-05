@@ -168,6 +168,8 @@
   <ItemGroup>
     <ClInclude Include="Main.h" />
     <ClInclude Include="src\Calculator.hpp" />
+    <ClInclude Include="src\ControllerTypes\Controller.hpp" />
+    <ClInclude Include="src\ControllerTypes\MouseController.hpp" />
     <ClInclude Include="src\ControllerTypes\PlatformerController.hpp" />
     <ClInclude Include="src\Objects\ECS\Animation.hpp" />
     <ClInclude Include="src\Objects\ECS\Collider.hpp" />
