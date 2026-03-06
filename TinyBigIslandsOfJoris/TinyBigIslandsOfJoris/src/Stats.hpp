@@ -10,5 +10,5 @@ struct Stats {
 	float FlightTime = 15.f;
 
 	// Bulding
-	int BuildingDistance = 5; // Tiles from player
+	int BuildingDistance = 7; // Tiles from player
 };

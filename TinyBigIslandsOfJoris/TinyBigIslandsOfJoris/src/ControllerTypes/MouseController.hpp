@@ -36,12 +36,25 @@ private:
 	void MouseJustPressed(float delta, const SDL_Event& sdlEvent, Sprite* spriteAnim) {
 		Vector2 mouseGlobalPosition = MousePosition + Vector2(Game::Camera.x, Game::Camera.y);
 		Vector2 tiledMousePosition = TileRenderer::GetTiledPosition(mouseGlobalPosition);
+		Vector2 tiledPlayerPosition = TileRenderer::GetTiledPosition(PlayerEntity->Position);
+
+		// TODO this should be multipurpose, when equiped or inventory location use item
 		if (MouseActions & SDL_BUTTON_LMASK && !(PostMouseButtonPressed & SDL_BUTTON_LMASK))
 		{
-			std::cout << "Left button clicked at: " << MousePosition << std::endl;
+			float magnitude = (tiledPlayerPosition - tiledMousePosition).GetMagnitude();
+			/*std::cout << "Left button clicked at: " << MousePosition << std::endl;
 			std::cout << "Mouse global position relative to camera: " << mouseGlobalPosition << std::endl;
 			std::cout << "Tile position relative to mouse: " << tiledMousePosition << std::endl;
-			Game::AddTile(0, Vector2(0, 0), tiledMousePosition, Vector2(16,16), "Assets/dirt.jpg");
+			std::cout << "Tile position of player: " << tiledPlayerPosition << std::endl;
+			std::cout << "Magnitude: " << (tiledPlayerPosition - tiledMousePosition).GetMagnitude() << std::endl;*/
+			if (magnitude <= PlayerEntity->Stat->BuildingDistance)
+			{
+				Game::AddTile(0, Vector2(0, 0), TileRenderer::GetTileLocation(mouseGlobalPosition), Vector2(16, 16), "Assets/dirt.jpg");
+			}
+			else
+			{
+				std::cout << "Cannot place block here..." << std::endl;
+			}
 		}
 	}
 

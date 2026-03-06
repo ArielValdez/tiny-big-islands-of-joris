@@ -10,9 +10,14 @@ TileRenderer::TileRenderer() {
 Vector2 TileRenderer::GetTiledPosition(Vector2 globalPosition) {
 	Vector2 tilePosition = Vector2(
 		Calculator::FloorInt(globalPosition.X / Game::DefaultTileSize.X), 
-		Calculator::FloorInt(globalPosition.Y / Game::DefaultTileSize.Y)) * 32;
+		Calculator::FloorInt(globalPosition.Y / Game::DefaultTileSize.Y));
 
 	return tilePosition;
+}
+
+Vector2 TileRenderer::GetTileLocation(Vector2 globalPosition) {
+	Vector2 xy = TileRenderer::GetTiledPosition(globalPosition);
+	return  Vector2(xy.X * Game::DefaultTileSize.X, xy.Y * Game::DefaultTileSize.Y);
 }
 
 void TileRenderer::LoadMap(const char* path, int sizex, int sizey, int mapW, int mapH) {
