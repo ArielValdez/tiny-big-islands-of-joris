@@ -1,9 +1,12 @@
 # tiny-big-islands-of-joris
 Sandbox game written in C++
 
-## References
-* Using SDL2
-* Using SDL2_Image
+## Dependencias
+* SDL2 2.0.5
+* SDL2.Nuget 2.32.8
+* SDL2.Nuget.Redis 2.32.8
+* SDL2_Image 2.8.8
+* SDL2_Image.Redist 2.8.8
 
 ### Tutorial used
 * https://www.youtube.com/watch?v=agn8GqGrCj4&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx&index=7
