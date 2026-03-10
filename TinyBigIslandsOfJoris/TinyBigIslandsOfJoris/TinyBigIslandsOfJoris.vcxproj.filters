@@ -72,6 +72,12 @@
     <ClCompile Include="src\Inventory\Inventory.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdlrenderer2.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdl2.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -201,6 +207,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Inventory\Item.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdl2.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdlrenderer2.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -165,6 +165,8 @@
     <ClCompile Include="src\Objects\Vector2.cpp" />
     <ClCompile Include="src\Objects\Vector3.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdlrenderer2.cpp" />
     <ClCompile Include="ThirdParty\Vendor\imgui\imgui.cpp" />
     <ClCompile Include="ThirdParty\Vendor\imgui\imgui_demo.cpp" />
     <ClCompile Include="ThirdParty\Vendor\imgui\imgui_draw.cpp" />
@@ -209,6 +211,8 @@
     <ClInclude Include="src\TextureManager.hpp" />
     <ClInclude Include="src\UI\UI.h" />
     <ClInclude Include="src\WindowManager.h" />
+    <ClInclude Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdl2.h" />
+    <ClInclude Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdlrenderer2.h" />
     <ClInclude Include="ThirdParty\Vendor\imgui\imconfig.h" />
     <ClInclude Include="ThirdParty\Vendor\imgui\imgui.h" />
     <ClInclude Include="ThirdParty\Vendor\imgui\imgui_internal.h" />

@@ -1,6 +1,12 @@
 #pragma once
+// SDL
 #include <SDL.h>
 #include <SDL_image.h>
+// ImGUI
+#include <backends/imgui_impl_sdl2.h>
+#include <backends/imgui_impl_sdlrenderer2.h>
+#include <imgui.h>
+
 #include <iostream>
 #include <vector>
 #include <cmath>
