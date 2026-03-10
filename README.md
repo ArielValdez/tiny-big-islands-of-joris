@@ -25,7 +25,7 @@ Sandbox game written in C++
   - [x] Crear Update con delta
   - [x] Crear PhysicsUpdate con delta
 - [ ] Sistema de inventario
-  - [ ] Personaje tendrá una máximo de 50 objetos diferentes
+  - [x] Personaje tendrá una máximo de 50 objetos diferentes
 - [ ] Sistema de equipamiento
 - [ ] Sistema de niveles de personajes (opcionalmente)
 - [ ] Sistema de clases / Jobs
