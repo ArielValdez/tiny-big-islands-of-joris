@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -124,7 +124,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)ThirdParty\Vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
@@ -155,6 +155,7 @@
     <ClCompile Include="src\Calculator.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Inventory\Inventory.cpp" />
     <ClCompile Include="src\Objects\Color.cpp" />
     <ClCompile Include="src\Objects\ECS\Collission.cpp" />
     <ClCompile Include="src\Objects\ECS\Player.cpp" />
@@ -164,6 +165,11 @@
     <ClCompile Include="src\Objects\Vector2.cpp" />
     <ClCompile Include="src\Objects\Vector3.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="ThirdParty\Vendor\imgui\imgui.cpp" />
+    <ClCompile Include="ThirdParty\Vendor\imgui\imgui_demo.cpp" />
+    <ClCompile Include="ThirdParty\Vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="ThirdParty\Vendor\imgui\imgui_tables.cpp" />
+    <ClCompile Include="ThirdParty\Vendor\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -171,6 +177,9 @@
     <ClInclude Include="src\ControllerTypes\Controller.hpp" />
     <ClInclude Include="src\ControllerTypes\MouseController.hpp" />
     <ClInclude Include="src\ControllerTypes\PlatformerController.hpp" />
+    <ClInclude Include="src\Inventory\Inventory.h" />
+    <ClInclude Include="src\Inventory\Inventory.hpp" />
+    <ClInclude Include="src\Inventory\Item.hpp" />
     <ClInclude Include="src\Objects\ECS\Animation.hpp" />
     <ClInclude Include="src\Objects\ECS\Collider.hpp" />
     <ClInclude Include="src\Objects\ECS\Collission.hpp" />
@@ -186,7 +195,7 @@
     <ClInclude Include="src\Objects\ECS\Transform.hpp" />
     <ClInclude Include="src\Objects\EntityComponentSystem.hpp" />
     <ClInclude Include="src\Objects\Enums\CollissionLayerMap.hpp" />
-    <ClInclude Include="src\Objects\Enums\EquipmentType.hpp" />
+    <ClInclude Include="src\Objects\Enums\ItemType.hpp" />
     <ClInclude Include="src\Objects\Enums\GroupLabels.hpp" />
     <ClInclude Include="src\Objects\Enums\HiliiRaces.hpp" />
     <ClInclude Include="src\Objects\TileRenderer.hpp" />
@@ -198,7 +207,14 @@
     <ClInclude Include="src\Objects\WorldObjects\WorldManager.hpp" />
     <ClInclude Include="src\Stats.hpp" />
     <ClInclude Include="src\TextureManager.hpp" />
+    <ClInclude Include="src\UI\UI.h" />
     <ClInclude Include="src\WindowManager.h" />
+    <ClInclude Include="ThirdParty\Vendor\imgui\imconfig.h" />
+    <ClInclude Include="ThirdParty\Vendor\imgui\imgui.h" />
+    <ClInclude Include="ThirdParty\Vendor\imgui\imgui_internal.h" />
+    <ClInclude Include="ThirdParty\Vendor\imgui\imstb_rectpack.h" />
+    <ClInclude Include="ThirdParty\Vendor\imgui\imstb_textedit.h" />
+    <ClInclude Include="ThirdParty\Vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\map.map" />

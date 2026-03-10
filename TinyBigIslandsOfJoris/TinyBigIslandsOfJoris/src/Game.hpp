@@ -17,8 +17,8 @@ public:
 	static SDL_Renderer* Renderer;
 	static std::vector<Collider*> Colliders;
 	static bool IsRunning;
-	static Vector2 Gravity;
 	static SDL_Rect Camera;
+	static Vector2 Gravity;
 	static Vector2 GlobalMousePosition;
 	static Vector2 DefaultTileSize;
 
