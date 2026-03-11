@@ -21,12 +21,13 @@ class Game {
 public:
 	WindowManager* WindowRuleManager = NULL;
 	static SDL_Renderer* Renderer;
+	static ImGuiContext* ImGuiContext;
 	static std::vector<Collider*> Colliders;
-	static bool IsRunning;
 	static SDL_Rect Camera;
 	static Vector2 Gravity;
 	static Vector2 GlobalMousePosition;
 	static Vector2 DefaultTileSize;
+	static bool IsRunning;
 
 public:
 	Game();

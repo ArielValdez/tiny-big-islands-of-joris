@@ -14,15 +14,18 @@ Manager manager;
 #pragma region Static
 SDL_Renderer* Game::Renderer = nullptr;
 std::vector<Collider*> Game::Colliders;
-bool Game::IsRunning = false;
+ImGuiContext* Game::ImGuiContext;
 SDL_Rect Game::Camera = { 0, 0, 500, 500 };
 Vector2 Game::GlobalMousePosition = Vector2(0, 0);
 Vector2 Game::DefaultTileSize = Vector2(32, 32);
+bool Game::IsRunning = false;
 #pragma endregion
 
 Player& player = (Player&)(manager.AddEntity<Player>());
 Entity& wallTest = manager.AddEntity();
 Entity& wallTest2 = manager.AddEntity();
+
+bool showSomePanel = true;
 
 const char* spriteSheetMap = "Assets/terrain_ss.png";
 
@@ -58,6 +61,17 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 	WindowRuleManager->Width = width;
 	WindowRuleManager->Height = height;
 
+	// Init Dear ImGUI
+	if (!IMGUI_CHECKVERSION())
+	{
+		return false;
+	}
+	Game::ImGuiContext = ImGui::CreateContext();
+	ImGuiIO& io{ ImGui::GetIO() };
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+
+	// SDL2 Window
 	Game::Window = SDL_CreateWindow(title, xPos, yPos, WindowRuleManager->Width, WindowRuleManager->Height, windowFlag);
 	if (Game::Window == nullptr)
 	{
@@ -71,6 +85,15 @@ bool Game::Init(const char* title, int xPos, int yPos, int width, int height, bo
 		std::printf("Error creating a new Renderer");
 		return false;
 	}
+
+	// Setup Platform/Renderer backends
+	ImGui_ImplSDL2_InitForSDLRenderer(
+		Game::Window,
+		Game::Renderer
+	);
+	ImGui_ImplSDLRenderer2_Init(
+		Game::Renderer
+	);
 
 	map = new TileRenderer();
 	map->LoadMap("Assets/map.map", 32, 32, 32, 32);
@@ -115,8 +138,6 @@ void Game::Update(double delta) {
 	manager.Refresh();
 	manager.Update(delta);
 
-
-
 	Camera.x = player.Position.X - (WindowRuleManager->Width / 2);
 	Camera.y = player.Position.Y - (WindowRuleManager->Height / 2);
 }
@@ -137,6 +158,8 @@ void Game::HandleEvents() {
 
 	if (SDL_PollEvent(&sdlEvent))
 	{
+		ImGui_ImplSDL2_ProcessEvent(&sdlEvent);
+
 		switch (sdlEvent.type)
 		{
 		case SDL_QUIT:
@@ -152,7 +175,29 @@ void Game::HandleEvents() {
 
 void Game::Render() {
 	SDL_RenderClear(Renderer);
-	//manager.Draw(Game::Camera); // Refactor
+
+	// ImGui Start Frame
+	ImGui_ImplSDLRenderer2_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
+
+	// Render "some panel".
+	//if (showSomePanel) {
+	//	ImGui::Begin("Some panel", &showSomePanel);
+	//	ImGui::Text("Hello World");
+	//	ImGui::End();
+	//}
+
+	// Rendering
+	ImGui::Render();
+
+	//manager.Draw(Game::Camera); // TODO Refactor
+
+	// TODO Crear una nueva clase Window, donde se manejarán todos los eventos pertenecientes a la ventana SDL e ImGUI
+	/*SDL_SetRenderDrawColor(
+		Game::Renderer,
+		100, 100, 100, 255
+	);*/
 
 	for (auto& t : tiles)
 	{
@@ -169,18 +214,29 @@ void Game::Render() {
 		t->Draw(Game::Camera);
 	}
 
+	// Render data through the SDL renderer
+	ImGui_ImplSDLRenderer2_RenderDrawData(
+		ImGui::GetDrawData(),
+		Game::Renderer
+	);
+
 	SDL_RenderPresent(Renderer);
 }
 
 void Game::Finalize() {
 	// Destroy objects
 	if (!Disposed) {
+		ImGui_ImplSDLRenderer2_Shutdown();
+		ImGui_ImplSDL2_Shutdown();
+		ImGui::DestroyContext();
+
 		SDL_DestroyWindow(Window);
 		SDL_DestroyRenderer(Renderer);
 		SDL_Quit();
 
 		// Null pointers on pointers
 		manager.Destroy();
+
 		WindowRuleManager = nullptr;
 		Window = nullptr;
 		Renderer = nullptr;

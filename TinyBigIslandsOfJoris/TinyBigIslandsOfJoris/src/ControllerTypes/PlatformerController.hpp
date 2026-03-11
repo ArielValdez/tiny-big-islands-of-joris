@@ -35,6 +35,12 @@ public:
 private:
 	void Pressed(float delta, const SDL_Event& sdlEvent, Sprite* spriteAnim, const Uint8* keysPressed) {
 		// Key Pressed
+#if DEBUG
+		if (keysPressed[SDL_SCANCODE_F8])
+		{
+			Game::IsRunning = false;
+		}
+#endif
 		if (keysPressed[SDL_SCANCODE_W])
 		{
 
@@ -83,9 +89,15 @@ private:
 			PlayerEntity->IsGrounded = false;
 		}
 
+		if (keysPressed[SDL_SCANCODE_ESCAPE] && !PostKeysPressed[SDL_SCANCODE_ESCAPE])
+		{
+			// Inventory
+			std::cout << "Inventory pressed" << std::endl;
+		}
+
 		if (keysPressed[SDL_SCANCODE_E] && !PostKeysPressed[SDL_SCANCODE_E])
 		{
-			// Quick Heal
+			// Grappling
 			std::cout << "Grappling pressed" << std::endl;
 		}
 
@@ -97,7 +109,7 @@ private:
 
 		if (keysPressed[SDL_SCANCODE_M] && !PostKeysPressed[SDL_SCANCODE_M])
 		{
-			// Quick Heal
+			// Map
 			std::cout << "Map pressed" << std::endl;
 		}
 
