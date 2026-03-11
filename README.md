@@ -7,6 +7,8 @@ Sandbox game written in C++
 * SDL2.Nuget.Redis 2.32.8
 * SDL2_Image 2.8.8
 * SDL2_Image.Redist 2.8.8
+* SDL2_TTF 2.24.0
+* SDL2_TTF.Redist 2.24.0
 * Ocornut ImGUI
 	* https://github.com/ocornut/imgui.git
 
