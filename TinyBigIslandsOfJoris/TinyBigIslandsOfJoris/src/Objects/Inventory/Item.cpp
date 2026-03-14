@@ -10,7 +10,7 @@ Item::Item(Manager& manager) : Entity(manager) {
 
 Item::Item(Manager& manager,ItemType type, size_t maxQuantity, const char* desc) : Entity(manager) {
 	Type = type;
-	MaxQuantity = MaxQuantity;
+	MaxQuantity = maxQuantity;
 	Quantity = 1;
 	IsStackable = (MaxQuantity > 1);
 	Description = desc;
