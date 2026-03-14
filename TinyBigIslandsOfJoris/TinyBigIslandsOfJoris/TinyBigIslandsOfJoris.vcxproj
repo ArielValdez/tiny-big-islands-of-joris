@@ -155,7 +155,9 @@
     <ClCompile Include="src\Calculator.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
-    <ClCompile Include="src\Inventory\Inventory.cpp" />
+    <ClCompile Include="src\Objects\Inventory\Inventory.cpp" />
+    <ClCompile Include="src\Objects\Inventory\Item.cpp" />
+    <ClCompile Include="src\Objects\Inventory\Panel.cpp" />
     <ClCompile Include="src\Objects\Color.cpp" />
     <ClCompile Include="src\Objects\ECS\Collission.cpp" />
     <ClCompile Include="src\Objects\ECS\Player.cpp" />
@@ -180,8 +182,10 @@
     <ClInclude Include="src\ControllerTypes\MouseController.hpp" />
     <ClInclude Include="src\ControllerTypes\PlatformerController.hpp" />
     <ClInclude Include="src\Inventory\Inventory.h" />
-    <ClInclude Include="src\Inventory\Inventory.hpp" />
-    <ClInclude Include="src\Inventory\Item.hpp" />
+    <ClInclude Include="src\Jobs\ThreadPool.hpp" />
+    <ClInclude Include="src\Objects\Inventory\Inventory.hpp" />
+    <ClInclude Include="src\Objects\Inventory\Item.hpp" />
+    <ClInclude Include="src\Objects\Inventory\Panel.hpp" />
     <ClInclude Include="src\Objects\ECS\Animation.hpp" />
     <ClInclude Include="src\Objects\ECS\Collider.hpp" />
     <ClInclude Include="src\Objects\ECS\Collission.hpp" />
@@ -209,7 +213,8 @@
     <ClInclude Include="src\Objects\WorldObjects\WorldManager.hpp" />
     <ClInclude Include="src\Stats.hpp" />
     <ClInclude Include="src\TextureManager.hpp" />
-    <ClInclude Include="src\UI\UI.h" />
+    <ClInclude Include="src\UI\Button.hpp" />
+    <ClInclude Include="src\UI\UI.hpp" />
     <ClInclude Include="src\WindowManager.h" />
     <ClInclude Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdl2.h" />
     <ClInclude Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdlrenderer2.h" />

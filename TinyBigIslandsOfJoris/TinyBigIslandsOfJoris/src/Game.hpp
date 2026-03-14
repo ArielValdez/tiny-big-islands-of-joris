@@ -14,6 +14,7 @@
 #include "WindowManager.h"
 #include "Objects/Vector2.hpp"
 #include "Calculator.hpp"
+#include "Jobs/ThreadPool.hpp"
 
 class Collider;
 
@@ -28,6 +29,7 @@ public:
 	static Vector2 GlobalMousePosition;
 	static Vector2 DefaultTileSize;
 	static bool IsRunning;
+	static ThreadPool Pool;
 
 public:
 	Game();
@@ -38,6 +40,7 @@ public:
 	void PhysicsUpdate(double delta);
 	void HandleEvents();
 	void HandleCollisions();
+	void ResolveCollisions();
 	void Render();
 	void Finalize();
 

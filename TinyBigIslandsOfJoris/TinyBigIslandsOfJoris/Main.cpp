@@ -61,6 +61,7 @@ int main(int argc, char* args[]) {
 		game->HandleEvents();
 		game->Update(deltaTime);
 		game->HandleCollisions();
+		game->ResolveCollisions();
 		game->PhysicsUpdate(deltaTime);
 		game->Render();
 

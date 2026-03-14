@@ -47,14 +47,15 @@ private:
 			std::cout << "Tile position relative to mouse: " << tiledMousePosition << std::endl;
 			std::cout << "Tile position of player: " << tiledPlayerPosition << std::endl;
 			std::cout << "Magnitude: " << (tiledPlayerPosition - tiledMousePosition).GetMagnitude() << std::endl;*/
-			if (magnitude <= PlayerEntity->Stat->BuildingDistance)
-			{
-				Game::AddTile(0, Vector2(0, 0), TileRenderer::GetTileLocation(mouseGlobalPosition), Vector2(16, 16), "Assets/dirt.jpg");
-			}
-			else
-			{
-				std::cout << "Cannot place block here..." << std::endl;
-			}
+			PlayerEntity->Pocket->CurrentPanel.UseItem();
+			//if (magnitude <= PlayerEntity->Stat->BuildingDistance)
+			//{
+			//	//Game::AddTile(0, Vector2(0, 0), TileRenderer::GetTileLocation(mouseGlobalPosition), Vector2(16, 16), "Assets/dirt.jpg");
+			//}
+			//else
+			//{
+			//	std::cout << "Cannot place block here..." << std::endl;
+			//}
 		}
 	}
 
@@ -71,6 +72,18 @@ private:
 		{
 			std::cout << "Middle button clicked at: " << MousePosition << std::endl;
 		}
+		if (sdlEvent.type == SDL_MOUSEWHEEL)
+		{
+			if (sdlEvent.wheel.y > 0)
+			{
+				PlayerEntity->Pocket->GetFocusedChannel(1);
+				std::cout << "Scrolling up: " << PlayerEntity->Pocket->CurrentTooltipIdx << std::endl;
+			}
+			if (sdlEvent.wheel.y < 0)
+			{
+				PlayerEntity->Pocket->GetFocusedChannel(-1);
+				std::cout << "Scrolling down: " << PlayerEntity->Pocket->CurrentTooltipIdx << std::endl;
+			}
+		}
 	}
-
 };

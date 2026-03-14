@@ -69,13 +69,19 @@
     <ClCompile Include="ThirdParty\Vendor\imgui\imgui_widgets.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\Inventory\Inventory.cpp">
+    <ClCompile Include="src\Objects\Inventory\Inventory.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdlrenderer2.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdl2.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Inventory\Panel.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Inventory\Item.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,7 +185,7 @@
     <ClInclude Include="src\ControllerTypes\Controller.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\UI\UI.h">
+    <ClInclude Include="src\UI\UI.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="ThirdParty\Vendor\imgui\imconfig.h">
@@ -203,16 +209,25 @@
     <ClInclude Include="src\Inventory\Inventory.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\Inventory\Inventory.hpp">
+    <ClInclude Include="src\Objects\Inventory\Inventory.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\Inventory\Item.hpp">
+    <ClInclude Include="src\Objects\Inventory\Item.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdl2.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="ThirdParty\Vendor\imgui\backends\imgui_impl_sdlrenderer2.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Inventory\Panel.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Button.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Jobs\ThreadPool.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

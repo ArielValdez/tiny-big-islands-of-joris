@@ -19,6 +19,7 @@ SDL_Rect Game::Camera = { 0, 0, 500, 500 };
 Vector2 Game::GlobalMousePosition = Vector2(0, 0);
 Vector2 Game::DefaultTileSize = Vector2(32, 32);
 bool Game::IsRunning = false;
+//ThreadPool Game::Pool;
 #pragma endregion
 
 Player& player = (Player&)(manager.AddEntity<Player>());
@@ -147,6 +148,10 @@ void Game::HandleCollisions() {
 
 	playerCollider->MoveX(player.Velocity.X, tiles, nullptr);
 	playerCollider->MoveY(player.Velocity.Y, tiles, nullptr);
+}
+
+void Game::ResolveCollisions() {
+
 }
 
 void Game::PhysicsUpdate(double delta) {
