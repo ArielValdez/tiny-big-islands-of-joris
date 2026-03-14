@@ -26,6 +26,8 @@ Sandbox game written in C++
 - [x] Game Loop System
   - [x] Crear Update con delta
   - [x] Crear PhysicsUpdate con delta
+  - [ ] Crear HandlerCollision (Hecho por otros hilos)
+  - [ ] Crear ResolveCollision
 - [ ] Sistema de inventario
   - [x] Personaje tendrá una máximo de 50 objetos diferentes
 - [ ] Sistema de equipamiento
@@ -41,6 +43,7 @@ Sandbox game written in C++
   - [ ] Máximo de 40 objetos diferentes
 - [ ] Sistema de Tilemaps
   - [ ] Verificar si se puede hacer Dual TileMaps
+  - [ ] Mejorar renderización de tilemaps
 - [ ] Tilemap editing
 	- [ ] World editing
 
